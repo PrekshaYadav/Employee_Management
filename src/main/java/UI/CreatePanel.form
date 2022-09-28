@@ -28,20 +28,34 @@
                               <Component id="Level_text" min="-2" pref="414" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="submit" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="team_info" alignment="1" max="32767" attributes="0"/>
                                   <Component id="team_info1" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="contact_number" max="32767" attributes="0"/>
+                                  <Component id="contact_number" alignment="1" max="32767" attributes="0"/>
                                   <Component id="emialID" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="photo_label" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="team_info_text" min="-2" pref="414" max="-2" attributes="0"/>
-                                      <Component id="position_title_text" min="-2" pref="414" max="-2" attributes="0"/>
-                                      <Component id="contact_number_text" alignment="1" min="-2" pref="414" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                      <Component id="insertPhoto" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Component id="photo" min="-2" pref="98" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="emailD_text" alignment="1" min="-2" pref="414" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="team_info_text" min="-2" pref="414" max="-2" attributes="0"/>
+                                          <Component id="position_title_text" min="-2" pref="414" max="-2" attributes="0"/>
+                                          <Component id="contact_number_text" alignment="1" min="-2" pref="414" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="emailD_text" alignment="1" min="-2" pref="414" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -63,11 +77,6 @@
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="submit" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -121,9 +130,17 @@
                   <Component id="emialID" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="emailD_text" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="insertPhoto" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="photo_label" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="photo" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="57" max="32767" attributes="0"/>
               <Component id="submit" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="196" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -228,6 +245,25 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="submitActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="photo">
+    </Component>
+    <Component class="javax.swing.JButton" name="insertPhoto">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Choose"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="insertPhotoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="photo_label">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Photo"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="photo_labelActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

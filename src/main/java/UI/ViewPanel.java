@@ -4,6 +4,8 @@
  */
 package UI;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Employee;
@@ -20,6 +22,9 @@ public class ViewPanel extends javax.swing.JPanel {
      */
     
     EmployeeHistory history;
+    String filename= null;
+    byte[] person_image = null;
+    
     
     public ViewPanel(EmployeeHistory history) {
         initComponents();
@@ -62,6 +67,7 @@ public class ViewPanel extends javax.swing.JPanel {
         team_info_text = new javax.swing.JTextField();
         emialID = new javax.swing.JTextField();
         bt_update = new javax.swing.JButton();
+        photo_label = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -168,8 +174,10 @@ public class ViewPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jScrollPane1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(level)
                         .addGap(18, 18, 18)
@@ -178,7 +186,7 @@ public class ViewPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(team_info)
                             .addComponent(team_info1)
-                            .addComponent(contact_number, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                            .addComponent(contact_number)
                             .addComponent(emialID))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,16 +207,18 @@ public class ViewPanel extends javax.swing.JPanel {
                             .addComponent(employee_id_text, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(age_text, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(start_date_text, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(411, Short.MAX_VALUE)
+                        .addComponent(bt_update)
+                        .addGap(18, 18, 18)
+                        .addComponent(bt_delete)
+                        .addGap(18, 18, 18)
+                        .addComponent(bt_view)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bt_update)
-                .addGap(18, 18, 18)
-                .addComponent(bt_delete)
-                .addGap(18, 18, 18)
-                .addComponent(bt_view)
-                .addGap(27, 27, 27))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(photo_label, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,13 +226,13 @@ public class ViewPanel extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
                 .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_update)
                     .addComponent(bt_delete)
-                    .addComponent(bt_view)
-                    .addComponent(bt_update))
-                .addGap(32, 32, 32)
+                    .addComponent(bt_view))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(name_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -258,7 +268,9 @@ public class ViewPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emialID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(emailD_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(photo_label, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(93, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -298,6 +310,9 @@ public class ViewPanel extends javax.swing.JPanel {
         contact_number_text.setText(String.valueOf(emp_Selected.getPhone_no()));
         emailD_text.setText(String.valueOf(emp_Selected.getEmail()));
         
+        byte[] img = emp_Selected.getPicture();
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(photo_label.getWidth(), photo_label.getHeight(),Image.SCALE_SMOOTH));
+        photo_label.setIcon(imageIcon);
     }//GEN-LAST:event_bt_viewActionPerformed
 
     private void team_info1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_team_info1ActionPerformed
@@ -332,7 +347,10 @@ public class ViewPanel extends javax.swing.JPanel {
         position_title_text.setText(String.valueOf(emp_Selected.getPosition()));
         contact_number_text.setText(String.valueOf(emp_Selected.getPhone_no()));
         emailD_text.setText(String.valueOf(emp_Selected.getEmail()));
-        
+        byte[] img = emp_Selected.getPicture();
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(photo_label.getWidth(), photo_label.getHeight(),Image.SCALE_SMOOTH));
+        photo_label.setIcon(imageIcon);
+
         
     }//GEN-LAST:event_tb_employeeMouseClicked
 
@@ -392,6 +410,7 @@ public class ViewPanel extends javax.swing.JPanel {
     private javax.swing.JTextField level;
     private javax.swing.JTextField name;
     private javax.swing.JTextField name_text;
+    private javax.swing.JLabel photo_label;
     private javax.swing.JTextField position_title_text;
     private javax.swing.JTextField start_date;
     private javax.swing.JTextField start_date_text;

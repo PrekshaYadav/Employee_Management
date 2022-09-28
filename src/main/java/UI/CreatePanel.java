@@ -4,6 +4,12 @@
  */
 package UI;
 
+import java.awt.Image;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import model.Employee;
 import model.EmployeeHistory;
@@ -14,6 +20,10 @@ import model.EmployeeHistory;
  */
 public class CreatePanel extends javax.swing.JPanel {
     EmployeeHistory history;
+    String filename= null;
+    byte[] person_image = null;
+    
+    
     /**
      * Creates new form CreatePanel
      */
@@ -52,6 +62,9 @@ public class CreatePanel extends javax.swing.JPanel {
         emialID = new javax.swing.JTextField();
         emailD_text = new javax.swing.JTextField();
         submit = new javax.swing.JButton();
+        photo = new javax.swing.JLabel();
+        insertPhoto = new javax.swing.JButton();
+        photo_label = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -111,6 +124,21 @@ public class CreatePanel extends javax.swing.JPanel {
             }
         });
 
+        insertPhoto.setText("Choose");
+        insertPhoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insertPhotoActionPerformed(evt);
+            }
+        });
+
+        photo_label.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        photo_label.setText("Photo");
+        photo_label.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                photo_labelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,18 +154,29 @@ public class CreatePanel extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(Level_text, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(team_info)
-                                    .addComponent(team_info1)
-                                    .addComponent(contact_number)
-                                    .addComponent(emialID))
-                                .addGap(18, 18, 18)
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(submit)
+                                .addGap(16, 16, 16))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(team_info, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(team_info1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(contact_number, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(emialID, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(photo_label))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(insertPhoto)
+                                        .addGap(35, 35, 35)
+                                        .addComponent(photo, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(team_info_text, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(position_title_text, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(contact_number_text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(emailD_text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(team_info_text, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(position_title_text, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(contact_number_text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(emailD_text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(employee_id, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
@@ -151,10 +190,6 @@ public class CreatePanel extends javax.swing.JPanel {
                             .addComponent(age_text, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(start_date_text, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(submit)
-                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,9 +232,15 @@ public class CreatePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emialID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(emailD_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(91, 91, 91)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(insertPhoto)
+                        .addComponent(photo_label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(photo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addComponent(submit)
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addGap(137, 137, 137))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -243,7 +284,7 @@ public class CreatePanel extends javax.swing.JPanel {
         emp.setPosition(position_title);
         emp.setPhone_no(contact_no);
         emp.setEmail(email);
-        
+        emp.setPicture(person_image);
         
         JOptionPane.showMessageDialog(this, "NewEmployee added");
         
@@ -255,9 +296,41 @@ public class CreatePanel extends javax.swing.JPanel {
         team_info_text.setText("");
         position_title_text.setText("");
         contact_number_text.setText("");
-        emailD_text.setText("");   
+        emailD_text.setText("");  
+        
     }//GEN-LAST:event_submitActionPerformed
 
+    private void photo_labelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_photo_labelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_photo_labelActionPerformed
+
+    private void insertPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertPhotoActionPerformed
+        // TODO add your handling code here:
+        
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File f = chooser.getSelectedFile();
+        filename = f.getAbsolutePath();
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(photo.getWidth(), photo.getHeight(),Image.SCALE_SMOOTH));
+        photo.setIcon(imageIcon);
+        try{
+            File image = new File(filename);
+            FileInputStream fis = new FileInputStream(image);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            for(int readNum; (readNum=fis.read(buf))!=-1;)
+            {
+                bos.write(buf,0,readNum);
+            }
+            person_image= bos.toByteArray();
+        }
+        catch(Exception e){
+        JOptionPane.showMessageDialog(null, e);
+        }
+        
+    }//GEN-LAST:event_insertPhotoActionPerformed
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Level_text;
@@ -269,10 +342,13 @@ public class CreatePanel extends javax.swing.JPanel {
     private javax.swing.JTextField emialID;
     private javax.swing.JTextField employee_id;
     private javax.swing.JTextField employee_id_text;
+    private javax.swing.JButton insertPhoto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField level;
     private javax.swing.JTextField name;
     private javax.swing.JTextField name_text;
+    private javax.swing.JLabel photo;
+    private javax.swing.JTextField photo_label;
     private javax.swing.JTextField position_title_text;
     private javax.swing.JTextField start_date;
     private javax.swing.JTextField start_date_text;

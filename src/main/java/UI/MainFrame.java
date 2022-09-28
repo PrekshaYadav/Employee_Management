@@ -35,6 +35,7 @@ public class MainFrame extends javax.swing.JFrame {
         controlPanel = new javax.swing.JPanel();
         createEmployee = new javax.swing.JButton();
         createEmployee1 = new javax.swing.JButton();
+        SearchButton = new javax.swing.JButton();
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -53,6 +54,13 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        SearchButton.setText("Search");
+        SearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(controlPanelLayout);
         controlPanelLayout.setHorizontalGroup(
@@ -61,7 +69,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(createEmployee, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(createEmployee1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(createEmployee1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(SearchButton, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         controlPanelLayout.setVerticalGroup(
@@ -71,7 +80,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(createEmployee)
                 .addGap(26, 26, 26)
                 .addComponent(createEmployee1)
-                .addContainerGap(659, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(SearchButton)
+                .addContainerGap(607, Short.MAX_VALUE))
         );
 
         splitPanel.setLeftComponent(controlPanel);
@@ -114,6 +125,12 @@ public class MainFrame extends javax.swing.JFrame {
         splitPanel.setRightComponent(viewPanel);
     }//GEN-LAST:event_createEmployee1ActionPerformed
 
+    private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
+        // TODO add your handling code here:
+        SearchPanel searchPanel = new SearchPanel(history);
+        splitPanel.setRightComponent(searchPanel);
+    }//GEN-LAST:event_SearchButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -150,6 +167,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton SearchButton;
     private javax.swing.JPanel controlPanel;
     private javax.swing.JButton createEmployee;
     private javax.swing.JButton createEmployee1;

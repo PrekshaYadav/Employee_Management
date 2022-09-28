@@ -61,6 +61,7 @@ public class ViewPanel extends javax.swing.JPanel {
         name_text = new javax.swing.JTextField();
         team_info_text = new javax.swing.JTextField();
         emialID = new javax.swing.JTextField();
+        bt_update = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -75,7 +76,7 @@ public class ViewPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Name", "ID", "Age", "Level"
+                "ID", "Name", "Age", "Level"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -84,6 +85,11 @@ public class ViewPanel extends javax.swing.JPanel {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tb_employee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_employeeMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tb_employee);
@@ -149,6 +155,13 @@ public class ViewPanel extends javax.swing.JPanel {
             }
         });
 
+        bt_update.setText("Update");
+        bt_update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_updateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -165,7 +178,7 @@ public class ViewPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(team_info)
                             .addComponent(team_info1)
-                            .addComponent(contact_number)
+                            .addComponent(contact_number, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                             .addComponent(emialID))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +202,9 @@ public class ViewPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane1))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(498, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bt_update)
+                .addGap(18, 18, 18)
                 .addComponent(bt_delete)
                 .addGap(18, 18, 18)
                 .addComponent(bt_view)
@@ -205,7 +220,8 @@ public class ViewPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_delete)
-                    .addComponent(bt_view))
+                    .addComponent(bt_view)
+                    .addComponent(bt_update))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -300,12 +316,70 @@ public class ViewPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_emialIDActionPerformed
 
+    private void tb_employeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_employeeMouseClicked
+        // TODO add your handling code here:
+        int selected_row = tb_employee.getSelectedRow();
+
+        DefaultTableModel model = (DefaultTableModel) tb_employee.getModel();
+        Employee emp_Selected = (Employee)model.getValueAt(selected_row, 0);
+        
+        name_text.setText(String.valueOf(emp_Selected.getName()));
+        employee_id_text.setText(String.valueOf(emp_Selected.getId()));
+        age_text.setText(String.valueOf(emp_Selected.getAge()));
+        start_date_text.setText(String.valueOf(emp_Selected.getDate()));
+        Level_text.setText(String.valueOf(emp_Selected.getLevel()));
+        team_info_text.setText(String.valueOf(emp_Selected.getTeam_info()));
+        position_title_text.setText(String.valueOf(emp_Selected.getPosition()));
+        contact_number_text.setText(String.valueOf(emp_Selected.getPhone_no()));
+        emailD_text.setText(String.valueOf(emp_Selected.getEmail()));
+        
+        
+    }//GEN-LAST:event_tb_employeeMouseClicked
+
+    
+    
+    private void bt_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_updateActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) tb_employee.getModel();
+        int selected_row = tb_employee.getSelectedRow();
+        Employee emp_Selected = (Employee)model.getValueAt(selected_row, 0);
+
+        if(tb_employee.getSelectedRowCount() == 1) {
+
+
+            int index = history.getHistory().indexOf(emp_Selected);
+            String name = name_text.getText();
+            int id = Integer.parseInt(employee_id_text.getText());
+            int age = Integer.parseInt(age_text.getText());
+            String date = start_date_text.getText();
+            int level = Integer.parseInt(Level_text.getText());
+            String team_info = team_info_text.getText();
+            String position_title = position_title_text.getText();
+            Long contact_no = Long.parseLong(contact_number_text.getText());
+            String email= emailD_text.getText(); 
+            
+            history.getHistory().get(index).setId(id);
+            history.getHistory().get(index).setName(name);
+            history.getHistory().get(index).setAge(age);
+            history.getHistory().get(index).setDate(date);
+            history.getHistory().get(index).setLevel(level);
+            history.getHistory().get(index).setTeam_info(team_info);
+            history.getHistory().get(index).setPosition(position_title);
+            history.getHistory().get(index).setPhone_no(contact_no);
+            history.getHistory().get(index).setEmail(email);
+            
+            JOptionPane.showMessageDialog( this, "Employee Updated");
+            populateTable();
+        }
+    }//GEN-LAST:event_bt_updateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Level_text;
     private javax.swing.JTextField age;
     private javax.swing.JTextField age_text;
     private javax.swing.JButton bt_delete;
+    private javax.swing.JButton bt_update;
     private javax.swing.JButton bt_view;
     private javax.swing.JTextField contact_number;
     private javax.swing.JTextField contact_number_text;
@@ -335,7 +409,6 @@ public class ViewPanel extends javax.swing.JPanel {
             Object[] row = new Object[4];
             row[0] = e;
             row[1] = e.getName();
-            row[1] = e.getId();
             row[2] = e.getAge();
             row[3] = e.getLevel();
             model.addRow(row);

@@ -68,6 +68,8 @@ public class ViewPanel extends javax.swing.JPanel {
         emialID = new javax.swing.JTextField();
         bt_update = new javax.swing.JButton();
         photo_label = new javax.swing.JLabel();
+        gender = new javax.swing.JTextField();
+        gender_text = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -168,6 +170,14 @@ public class ViewPanel extends javax.swing.JPanel {
             }
         });
 
+        gender.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        gender.setText("Gender");
+        gender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genderActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,14 +197,17 @@ public class ViewPanel extends javax.swing.JPanel {
                             .addComponent(team_info)
                             .addComponent(team_info1)
                             .addComponent(contact_number)
-                            .addComponent(emialID))
+                            .addComponent(emialID)
+                            .addComponent(gender, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(team_info_text, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(position_title_text, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(contact_number_text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(emailD_text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(team_info_text, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(position_title_text, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(contact_number_text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(emailD_text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(gender_text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(employee_id)
@@ -218,7 +231,7 @@ public class ViewPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(photo_label, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,8 +282,12 @@ public class ViewPanel extends javax.swing.JPanel {
                     .addComponent(emialID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(emailD_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(gender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gender_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
                 .addComponent(photo_label, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -309,7 +326,7 @@ public class ViewPanel extends javax.swing.JPanel {
         position_title_text.setText(String.valueOf(emp_Selected.getPosition()));
         contact_number_text.setText(String.valueOf(emp_Selected.getPhone_no()));
         emailD_text.setText(String.valueOf(emp_Selected.getEmail()));
-        
+        gender_text.setText(emp_Selected.getGender());
         byte[] img = emp_Selected.getPicture();
         ImageIcon imageIcon = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(photo_label.getWidth(), photo_label.getHeight(),Image.SCALE_SMOOTH));
         photo_label.setIcon(imageIcon);
@@ -347,6 +364,7 @@ public class ViewPanel extends javax.swing.JPanel {
         position_title_text.setText(String.valueOf(emp_Selected.getPosition()));
         contact_number_text.setText(String.valueOf(emp_Selected.getPhone_no()));
         emailD_text.setText(String.valueOf(emp_Selected.getEmail()));
+        gender_text.setText(emp_Selected.getGender());
         byte[] img = emp_Selected.getPicture();
         ImageIcon imageIcon = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(photo_label.getWidth(), photo_label.getHeight(),Image.SCALE_SMOOTH));
         photo_label.setIcon(imageIcon);
@@ -391,6 +409,10 @@ public class ViewPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_bt_updateActionPerformed
 
+    private void genderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_genderActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Level_text;
@@ -405,6 +427,8 @@ public class ViewPanel extends javax.swing.JPanel {
     private javax.swing.JTextField emialID;
     private javax.swing.JTextField employee_id;
     private javax.swing.JTextField employee_id_text;
+    private javax.swing.JTextField gender;
+    private javax.swing.JTextField gender_text;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField level;

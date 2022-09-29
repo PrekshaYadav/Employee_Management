@@ -23,6 +23,7 @@ public class Employee {
     private long phone_no;
     private String email;
     private byte[] picture;
+    private String gender;
 
     public Employee(String name, int id, int age, boolean female, boolean male, int level, String team_info, String position, long phone_no, String email) {
         this.name = name;
@@ -35,6 +36,22 @@ public class Employee {
         this.position = position;
         this.phone_no = phone_no;
         this.email = email;
+    }
+
+    public Employee(String name, int id, int age, boolean female, boolean male, String date, int level, String team_info, String position, long phone_no, String email, byte[] picture, String gender) {
+        this.name = name;
+        this.id = id;
+        this.age = age;
+        this.female = female;
+        this.male = male;
+        this.date = date;
+        this.level = level;
+        this.team_info = team_info;
+        this.position = position;
+        this.phone_no = phone_no;
+        this.email = email;
+        this.picture = picture;
+        this.gender = gender;
     }
     
     public Employee(String name, int id, int age, boolean female, boolean male, int level, String team_info, String position, long phone_no, String email, byte[] picture) {
@@ -49,6 +66,15 @@ public class Employee {
         this.phone_no = phone_no;
         this.email = email;
         this.picture =  picture;
+        
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getGender() {
+        return gender;
     }
 
     public void setPicture(byte[] picture) {

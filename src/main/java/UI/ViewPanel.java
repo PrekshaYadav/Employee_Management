@@ -367,9 +367,7 @@ public class ViewPanel extends javax.swing.JPanel {
         gender_text.setText(emp_Selected.getGender());
         byte[] img = emp_Selected.getPicture();
         ImageIcon imageIcon = new ImageIcon(new ImageIcon(img).getImage().getScaledInstance(photo_label.getWidth(), photo_label.getHeight(),Image.SCALE_SMOOTH));
-        photo_label.setIcon(imageIcon);
-
-        
+        photo_label.setIcon(imageIcon);       
     }//GEN-LAST:event_tb_employeeMouseClicked
 
     

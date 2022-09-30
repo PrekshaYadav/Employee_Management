@@ -8,6 +8,8 @@ import java.awt.Image;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -295,14 +297,50 @@ public class CreatePanel extends javax.swing.JPanel {
         female_rb.setActionCommand("Female");
 
         String name = name_text.getText();
-        int id = Integer.parseInt(employee_id_text.getText());
+        if ((name.equals(""))
+            || (!name.matches("^[a-zA-Z]*$"))
+            || (name == null))
+        {
+            JOptionPane.showInputDialog(this, "Name invalid");
+
+        }        
+        String regex =  "[0-9]+";
+        int id=0;
+        System.out.println(regex);
+        if(!employee_id_text.getText().matches(regex))
+        {
+            System.out.println("If condition");
+            JOptionPane.showInputDialog(this, "Invalid iD");
+        }
+        else{
+        id = Integer.parseInt(employee_id_text.getText());
+        }
+        
         int age = Integer.parseInt(age_text.getText());
+        if(age<18 || age>70)
+        {
+            JOptionPane.showInputDialog(this, "Not eligible");
+        }
         String date = start_date_text.getText();
         int level = Integer.parseInt(Level_text.getText());
         String team_info = team_info_text.getText();
         String position_title = position_title_text.getText();
         Long contact_no = Long.parseLong(contact_number_text.getText());
+        Pattern p = Pattern.compile("^\\d{10}$");
+        Matcher m = p.matcher(contact_number_text.getText());
+        if(!m.matches())
+        {
+            JOptionPane.showInputDialog(this, "Contact number invalid ");
+
+        }    
         String email= emailD_text.getText(); 
+        Pattern p1 = Pattern.compile("^(.+)@(\\S+)$");
+        Matcher m1 = p1.matcher(email);
+        if(!m1.matches())
+        {
+            JOptionPane.showInputDialog(this, "Email Id invalid ");
+
+        }
         
         emp.setName(name);
         emp.setAge(age);
@@ -327,8 +365,7 @@ public class CreatePanel extends javax.swing.JPanel {
         team_info_text.setText("");
         position_title_text.setText("");
         contact_number_text.setText("");
-        emailD_text.setText("");  
-        
+        emailD_text.setText("");      
     }//GEN-LAST:event_submitActionPerformed
 
     private void photo_labelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_photo_labelActionPerformed

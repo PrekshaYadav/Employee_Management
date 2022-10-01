@@ -8,6 +8,11 @@ import java.awt.Image;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
@@ -51,7 +56,6 @@ public class CreatePanel extends javax.swing.JPanel {
         age = new javax.swing.JTextField();
         age_text = new javax.swing.JTextField();
         start_date = new javax.swing.JTextField();
-        start_date_text = new javax.swing.JTextField();
         Level_text = new javax.swing.JTextField();
         level = new javax.swing.JTextField();
         team_info = new javax.swing.JTextField();
@@ -69,6 +73,7 @@ public class CreatePanel extends javax.swing.JPanel {
         male_rb = new javax.swing.JRadioButton();
         female_rb = new javax.swing.JRadioButton();
         emialID1 = new javax.swing.JTextField();
+        date_chooser = new com.toedter.calendar.JDateChooser();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -157,6 +162,10 @@ public class CreatePanel extends javax.swing.JPanel {
             }
         });
 
+        date_chooser.setMaxSelectableDate(new Date());
+        date_chooser.setDate(new Date());
+        date_chooser.setDateFormatString("dd-MM-yyyy");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -211,7 +220,7 @@ public class CreatePanel extends javax.swing.JPanel {
                             .addComponent(name_text, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(employee_id_text, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(age_text, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(start_date_text, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(date_chooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -232,9 +241,9 @@ public class CreatePanel extends javax.swing.JPanel {
                     .addComponent(age, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(age_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(start_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(start_date_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(date_chooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Level_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -296,21 +305,23 @@ public class CreatePanel extends javax.swing.JPanel {
         male_rb.setActionCommand("Male");
         female_rb.setActionCommand("Female");
 
-        String name = name_text.getText();
+        String name = new String();
         if ((name.equals(""))
             || (!name.matches("^[a-zA-Z]*$"))
             || (name == null))
         {
-            JOptionPane.showInputDialog(this, "Name invalid");
-
-        }        
+            name = JOptionPane.showInputDialog(this, "Name invalid");
+            
+        }  
+        else{
+         name = name_text.getText();
+        }
+        
         String regex =  "[0-9]+";
         int id=0;
-        System.out.println(regex);
         if(!employee_id_text.getText().matches(regex))
         {
-            System.out.println("If condition");
-            JOptionPane.showInputDialog(this, "Invalid iD");
+            id = Integer.parseInt(JOptionPane.showInputDialog(this, "Invalid iD"));
         }
         else{
         id = Integer.parseInt(employee_id_text.getText());
@@ -319,33 +330,42 @@ public class CreatePanel extends javax.swing.JPanel {
         int age = Integer.parseInt(age_text.getText());
         if(age<18 || age>70)
         {
-            JOptionPane.showInputDialog(this, "Not eligible");
+            age = Integer.parseInt(JOptionPane.showInputDialog(this, "Not eligible"));
         }
-        String date = start_date_text.getText();
+        
+        //String date = date_chooser.getDateFormatString();
+        Date date1 = new Date();
+        try {  
+            date1=new SimpleDateFormat("dd-MM-yyyy").parse(date_chooser.getDateFormatString());
+        } catch (ParseException ex) {
+            Logger.getLogger(CreatePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         int level = Integer.parseInt(Level_text.getText());
         String team_info = team_info_text.getText();
         String position_title = position_title_text.getText();
         Long contact_no = Long.parseLong(contact_number_text.getText());
         Pattern p = Pattern.compile("^\\d{10}$");
         Matcher m = p.matcher(contact_number_text.getText());
+        
         if(!m.matches())
         {
-            JOptionPane.showInputDialog(this, "Contact number invalid ");
+            contact_no = Long.parseLong(JOptionPane.showInputDialog(this, "Contact number invalid "));
 
-        }    
-        String email= emailD_text.getText(); 
+        }
+        String email=emailD_text.getText();
         Pattern p1 = Pattern.compile("^(.+)@(\\S+)$");
         Matcher m1 = p1.matcher(email);
         if(!m1.matches())
         {
-            JOptionPane.showInputDialog(this, "Email Id invalid ");
+            email = JOptionPane.showInputDialog(this, "Email Id invalid ");
 
         }
         
         emp.setName(name);
         emp.setAge(age);
         emp.setId(id);
-        emp.setDate(date);
+        emp.setDate(date1);
         emp.setLevel(level);
         emp.setTeam_info(team_info);
         emp.setPosition(position_title);
@@ -360,7 +380,6 @@ public class CreatePanel extends javax.swing.JPanel {
         name_text.setText("");
         employee_id_text.setText("");
         age_text.setText("");
-        start_date_text.setText("");
         Level_text.setText("");
         team_info_text.setText("");
         position_title_text.setText("");
@@ -410,6 +429,7 @@ public class CreatePanel extends javax.swing.JPanel {
     private javax.swing.JTextField age_text;
     private javax.swing.JTextField contact_number;
     private javax.swing.JTextField contact_number_text;
+    private com.toedter.calendar.JDateChooser date_chooser;
     private javax.swing.JTextField emailD_text;
     private javax.swing.JTextField emialID;
     private javax.swing.JTextField emialID1;
@@ -427,7 +447,6 @@ public class CreatePanel extends javax.swing.JPanel {
     private javax.swing.JTextField photo_label;
     private javax.swing.JTextField position_title_text;
     private javax.swing.JTextField start_date;
-    private javax.swing.JTextField start_date_text;
     private javax.swing.JButton submit;
     private javax.swing.JTextField team_info;
     private javax.swing.JTextField team_info1;

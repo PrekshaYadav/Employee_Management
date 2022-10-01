@@ -16,7 +16,7 @@ public class Employee {
     private int age;
     private boolean female;
     private boolean male;
-    private String date;
+    private Date date;
     private int level;
     private String team_info;
     private String position;
@@ -38,7 +38,7 @@ public class Employee {
         this.email = email;
     }
 
-    public Employee(String name, int id, int age, boolean female, boolean male, String date, int level, String team_info, String position, long phone_no, String email, byte[] picture, String gender) {
+    public Employee(String name, int id, int age, boolean female, boolean male, Date date, int level, String team_info, String position, long phone_no, String email, byte[] picture, String gender) {
         this.name = name;
         this.id = id;
         this.age = age;
@@ -113,7 +113,7 @@ public class Employee {
         return male;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -157,7 +157,7 @@ public class Employee {
         this.male = male;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

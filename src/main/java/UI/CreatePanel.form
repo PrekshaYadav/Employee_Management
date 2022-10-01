@@ -82,7 +82,7 @@
                           <Component id="name_text" min="-2" pref="414" max="-2" attributes="0"/>
                           <Component id="employee_id_text" min="-2" pref="414" max="-2" attributes="0"/>
                           <Component id="age_text" min="-2" pref="414" max="-2" attributes="0"/>
-                          <Component id="start_date_text" min="-2" pref="414" max="-2" attributes="0"/>
+                          <Component id="date_chooser" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -111,9 +111,9 @@
                   <Component id="age_text" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="start_date" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="start_date_text" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="start_date" min="-2" max="-2" attributes="0"/>
+                  <Component id="date_chooser" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -203,8 +203,6 @@
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Start Date"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="start_date_text">
     </Component>
     <Component class="javax.swing.JTextField" name="Level_text">
     </Component>
@@ -306,6 +304,14 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="emialID1ActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="date_chooser">
+      <Properties>
+        <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="date_chooser.setMaxSelectableDate(new Date());&#xa;date_chooser.setDate(new Date());"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

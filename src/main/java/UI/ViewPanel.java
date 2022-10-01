@@ -5,6 +5,11 @@
 package UI;
 
 import java.awt.Image;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -358,7 +363,7 @@ public class ViewPanel extends javax.swing.JPanel {
         name_text.setText(String.valueOf(emp_Selected.getName()));
         employee_id_text.setText(String.valueOf(emp_Selected.getId()));
         age_text.setText(String.valueOf(emp_Selected.getAge()));
-        start_date_text.setText(String.valueOf(emp_Selected.getDate()));
+        start_date_text.setText(String.valueOf(emp_Selected.getDate().toString()));
         Level_text.setText(String.valueOf(emp_Selected.getLevel()));
         team_info_text.setText(String.valueOf(emp_Selected.getTeam_info()));
         position_title_text.setText(String.valueOf(emp_Selected.getPosition()));
@@ -395,7 +400,16 @@ public class ViewPanel extends javax.swing.JPanel {
             history.getHistory().get(index).setId(id);
             history.getHistory().get(index).setName(name);
             history.getHistory().get(index).setAge(age);
-            history.getHistory().get(index).setDate(date);
+            
+            Date date1 = new Date();
+            try {  
+                date1=new SimpleDateFormat("dd-MM-yyyy").parse(date);
+            } catch (ParseException ex) {
+                Logger.getLogger(CreatePanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            
+            history.getHistory().get(index).setDate(date1);
             history.getHistory().get(index).setLevel(level);
             history.getHistory().get(index).setTeam_info(team_info);
             history.getHistory().get(index).setPosition(position_title);

@@ -305,7 +305,7 @@ public class CreatePanel extends javax.swing.JPanel {
         male_rb.setActionCommand("Male");
         female_rb.setActionCommand("Female");
 
-        String name = new String();
+        String name = name_text.getText();
         if ((name.equals(""))
             || (!name.matches("^[a-zA-Z]*$"))
             || (name == null))
@@ -313,9 +313,7 @@ public class CreatePanel extends javax.swing.JPanel {
             name = JOptionPane.showInputDialog(this, "Name invalid");
             
         }  
-        else{
-         name = name_text.getText();
-        }
+        
         
         String regex =  "[0-9]+";
         int id=0;
@@ -384,7 +382,10 @@ public class CreatePanel extends javax.swing.JPanel {
         team_info_text.setText("");
         position_title_text.setText("");
         contact_number_text.setText("");
-        emailD_text.setText("");      
+        emailD_text.setText(""); 
+        male_rb.setSelected(false);
+        female_rb.setSelected(false);
+
     }//GEN-LAST:event_submitActionPerformed
 
     private void photo_labelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_photo_labelActionPerformed

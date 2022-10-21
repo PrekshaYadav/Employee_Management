@@ -159,7 +159,7 @@ public class MainFrame extends javax.swing.JFrame {
             dispose();
             HospitalAdminForm hospitalAdmin = new HospitalAdminForm();
             hospitalAdmin.show();
-            }
+        }
         }
         else if(role.equals("Community Admin"))
         {

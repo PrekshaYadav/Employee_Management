@@ -6,6 +6,7 @@ package UI;
 
 import Beans.City;
 import Beans.CityDirectory;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -155,7 +156,7 @@ public class CreateCityFrame extends javax.swing.JFrame {
         city.setId(id);
         city.setCountry(country);
         city.setName(name);
-        
+        JOptionPane.showMessageDialog( this, "City created .");
         dispose();
     }//GEN-LAST:event_bt_createActionPerformed
 

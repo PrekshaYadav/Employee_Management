@@ -12,8 +12,7 @@ import java.util.ArrayList;
  */
 public class Community {
 
-    public Community() {
-    }
+    
     
     private String name;
     private int zipcode;
@@ -22,10 +21,13 @@ public class Community {
     private String country;
     private String city;
 
+    public Community() {
+        houseDir = new ArrayList<House>();
+    }
     public Community(String name, int zipcode, ArrayList<House> houseDir, HospitalDirectory hospitalDirectory, String country, String city) {
         this.name = name;
         this.zipcode = zipcode;
-        this.houseDir = houseDir;
+        this.houseDir = new ArrayList<House>();
         this.hospitalDirectory = hospitalDirectory;
         this.country = country;
         this.city = city;
@@ -38,6 +40,8 @@ public class Community {
     public void setCity(String city) {
         this.city = city;
     }
+    
+    
 
     public Community(String name, int zipcode, ArrayList<House> houseDir, HospitalDirectory hospitalDirectory, String country) {
         this.name = name;

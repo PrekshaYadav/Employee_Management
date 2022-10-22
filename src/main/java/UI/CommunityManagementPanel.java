@@ -28,9 +28,9 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
 
     public CommunityManagementPanel(CityDirectory cityDirectory) {
         initComponents();
-        
+//        populateTable();
         this.cityDirectory = cityDirectory;
-        //populateTable();
+        populateTable();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -244,11 +244,13 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
                     System.out.println("#############################");
                 }
                 
-            }            
+            } 
+            JOptionPane.showMessageDialog( this, "Community updated .");
         }
-        
-        
-        
+        else
+        {
+            JOptionPane.showMessageDialog( this, "Please select a row to be updated.");
+        }
         System.out.println("##############6");
         populateTable();
      
@@ -274,6 +276,7 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
         tct_name.setText(community.getName());
         txt_country.setText(community.getCountry());
         txt_city.setText(community.getCity());
+        
         
 
     }//GEN-LAST:event_bt_viewActionPerformed

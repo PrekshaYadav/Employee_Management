@@ -30,27 +30,36 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="bt_back2" min="-2" pref="72" max="-2" attributes="0"/>
+                      <Component id="jLabel9" min="-2" pref="85" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="bt_create" min="-2" pref="72" max="-2" attributes="0"/>
+                      <Component id="txt_id" min="-2" pref="340" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel2" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-                          <Component id="jLabel6" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="bt_back2" min="-2" pref="72" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="bt_create" min="-2" pref="72" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txt_id" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
-                          <Component id="tct_name" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
-                          <Component id="txt_country" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
-                          <Component id="txt_city" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
-                          <Component id="txt_city1" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabel3" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="jLabel4" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="jLabel5" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="jLabel6" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="jLabel7" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="jLabel8" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="tct_name" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
+                              <Component id="txt_country" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
+                              <Component id="txt_city" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
+                              <Component id="txt_city1" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
+                              <Component id="member_count" min="-2" pref="340" max="-2" attributes="0"/>
+                              <Component id="owner_name" min="-2" pref="340" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -63,12 +72,12 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel2" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="jLabel9" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="txt_id" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="tct_name" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -88,12 +97,22 @@
                   <Component id="jLabel6" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="txt_city1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="bt_create" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                  <Component id="bt_back2" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                  <Component id="jLabel7" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="member_count" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="475" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel8" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="owner_name" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="bt_back2" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                  <Component id="bt_create" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="396" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -116,11 +135,6 @@
         <Property name="text" type="java.lang.String" value="City"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txt_id">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_idActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JTextField" name="txt_city">
     </Component>
     <Component class="javax.swing.JTextField" name="tct_name">
@@ -137,11 +151,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_countryActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="ID"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -166,6 +175,33 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_back2ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel7">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Member count"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel8">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Owner Name"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="member_count">
+    </Component>
+    <Component class="javax.swing.JTextField" name="owner_name">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="owner_nameActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel9">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Apartment No"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_id">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_idActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

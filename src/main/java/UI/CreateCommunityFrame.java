@@ -8,6 +8,7 @@ import Beans.City;
 import Beans.CityDirectory;
 import Beans.Community;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -192,9 +193,11 @@ public class CreateCommunityFrame extends javax.swing.JFrame {
                     ArrayList<Community> communityDir = city.getCommunityDir();
                     communityDir.add(community);
                     city.setCommunityDir(communityDir);
+                    JOptionPane.showMessageDialog( this, "Community created .");
+                    break;
                 }
             }
-            dispose();
+                dispose();
     }//GEN-LAST:event_bt_createActionPerformed
 
     /**

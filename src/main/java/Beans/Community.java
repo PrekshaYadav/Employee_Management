@@ -11,13 +11,51 @@ import java.util.ArrayList;
  * @author preks
  */
 public class Community {
+
+    public Community() {
+    }
     
     private String name;
-    private Long zipcode;
+    private int zipcode;
     private ArrayList<House> houseDir;
     private HospitalDirectory hospitalDirectory;
+    private String country;
+    private String city;
 
-    public Community(String name, Long zipcode, ArrayList<House> houseDir, HospitalDirectory hospitalDirectory) {
+    public Community(String name, int zipcode, ArrayList<House> houseDir, HospitalDirectory hospitalDirectory, String country, String city) {
+        this.name = name;
+        this.zipcode = zipcode;
+        this.houseDir = houseDir;
+        this.hospitalDirectory = hospitalDirectory;
+        this.country = country;
+        this.city = city;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public Community(String name, int zipcode, ArrayList<House> houseDir, HospitalDirectory hospitalDirectory, String country) {
+        this.name = name;
+        this.zipcode = zipcode;
+        this.houseDir = houseDir;
+        this.hospitalDirectory = hospitalDirectory;
+        this.country = country;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public Community(String name, int zipcode, ArrayList<House> houseDir, HospitalDirectory hospitalDirectory) {
         this.name = name;
         this.zipcode = zipcode;
         this.houseDir = houseDir;
@@ -34,7 +72,7 @@ public class Community {
     
     //private ArrayList<Hospital> hospitalDir;
 
-    public Community(String name, Long zipcode, ArrayList<House> houseDir) {
+    public Community(String name, int zipcode, ArrayList<House> houseDir) {
         this.name = name;
         this.zipcode = zipcode;
         this.houseDir = houseDir;
@@ -44,7 +82,7 @@ public class Community {
         this.name = name;
     }
 
-    public void setZipcode(Long zipcode) {
+    public void setZipcode(int zipcode) {
         this.zipcode = zipcode;
     }
 
@@ -56,12 +94,18 @@ public class Community {
         return name;
     }
 
-    public Long getZipcode() {
+    public int getZipcode() {
         return zipcode;
     }
 
     public ArrayList<House> getHouseDir() {
         return houseDir;
+    }
+    
+    @Override
+    public String toString()
+    {
+        return String.valueOf(zipcode);
     }
     
 }

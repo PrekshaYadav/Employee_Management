@@ -4,6 +4,11 @@
  */
 package UI;
 
+import Beans.City;
+import Beans.CityDirectory;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author preks
@@ -13,8 +18,15 @@ public class CityManagementPanel extends javax.swing.JPanel {
     /**
      * Creates new form CityManagementPanel
      */
-    public CityManagementPanel() {
+    CityDirectory cityDirectory;
+
+    public CityManagementPanel(CityDirectory cityDirectory) {
+        this.cityDirectory = cityDirectory;
         initComponents();
+        populateTable();
+    }
+    public CityManagementPanel() {
+        initComponents();   
     }
 
     /**
@@ -38,6 +50,7 @@ public class CityManagementPanel extends javax.swing.JPanel {
         txt_zip = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        bt_view1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -59,6 +72,11 @@ public class CityManagementPanel extends javax.swing.JPanel {
         jLabel3.setText("City");
 
         bt_view.setText("View");
+        bt_view.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_viewActionPerformed(evt);
+            }
+        });
 
         bt_create.setText("Create");
         bt_create.addActionListener(new java.awt.event.ActionListener() {
@@ -90,6 +108,13 @@ public class CityManagementPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        bt_view1.setText("Refresh Table");
+        bt_view1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_view1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,13 +134,14 @@ public class CityManagementPanel extends javax.swing.JPanel {
                             .addComponent(txt_zip, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_country, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(15, 15, 15)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(bt_view1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
                             .addComponent(bt_create, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(46, 46, 46)
                             .addComponent(bt_update, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(100, 100, 100)
+                            .addGap(38, 38, 38)
                             .addComponent(bt_view, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(227, Short.MAX_VALUE))
@@ -131,7 +157,8 @@ public class CityManagementPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_create)
                     .addComponent(bt_update)
-                    .addComponent(bt_view))
+                    .addComponent(bt_view)
+                    .addComponent(bt_view1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -154,11 +181,31 @@ public class CityManagementPanel extends javax.swing.JPanel {
 
     private void bt_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_updateActionPerformed
         // TODO add your handling code here:
+        
+        
+        int id = Integer.parseInt(txt_zip.getText());
+        String name = txt_city.getText();
+        String country = txt_country.getText();
+        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        int selected_row = jTable1.getSelectedRow();
+        City citySelected = (City)model.getValueAt(selected_row, 0);
+
+        if(jTable1.getSelectedRowCount() == 1) {
+
+            
+            int index = cityDirectory.getCityDirectory().indexOf(citySelected);
+            
+            cityDirectory.getCityDirectory().get(index).setId(id);
+            cityDirectory.getCityDirectory().get(index).setName(name);
+            cityDirectory.getCityDirectory().get(index).setCountry(country);
+        }   
+        populateTable();
     }//GEN-LAST:event_bt_updateActionPerformed
 
     private void bt_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_createActionPerformed
         // TODO add your handling code here:
-        CreateCityFrame city = new CreateCityFrame();
+        CreateCityFrame city = new CreateCityFrame(cityDirectory);
         city.show();
     }//GEN-LAST:event_bt_createActionPerformed
 
@@ -166,11 +213,50 @@ public class CityManagementPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_zipActionPerformed
 
+    private void bt_viewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_viewActionPerformed
+        // TODO add your handling code here:
+        //populateTable();
+        int selected_row = jTable1.getSelectedRow();
+        if(selected_row < 0)
+        {
+            JOptionPane.showMessageDialog( this, "Please select a row to view");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        City city = (City)model.getValueAt(selected_row, 0);
+        
+        txt_zip.setText(String.valueOf(city.getId()));
+        txt_city.setText(city.getName());
+        txt_country.setText(city.getCountry());
+        
 
+        
+    }//GEN-LAST:event_bt_viewActionPerformed
+
+    private void bt_view1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_view1ActionPerformed
+        // TODO add your handling code here:
+        populateTable();
+    }//GEN-LAST:event_bt_view1ActionPerformed
+
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        for(City c: cityDirectory.getCityDirectory())
+        {
+            Object[] row = new Object[4];
+            row[0] = c;
+            row[1] = c.getName();
+            row[2] = c.getCountry();
+            model.addRow(row);
+        }
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_create;
     private javax.swing.JButton bt_update;
     private javax.swing.JButton bt_view;
+    private javax.swing.JButton bt_view1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

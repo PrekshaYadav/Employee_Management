@@ -16,12 +16,25 @@ public class City {
     private String name;
     private String country;
     private ArrayList<Community> communityDir;
+    public City(int id, String name, String country) {
+        this.id = id;
+        this.name = name;
+        this.country = country;
+        this.communityDir = new ArrayList<Community>();
+
+    }
+    
+
+    public City() {
+        communityDir = new ArrayList<Community>();
+
+    }
 
     public City(int id, String name, String country, ArrayList<Community> communityDir) {
         this.id = id;
         this.name = name;
         this.country = country;
-        this.communityDir = communityDir;
+        this.communityDir = new ArrayList<Community>();
     }
 
     public int getId() {
@@ -56,5 +69,10 @@ public class City {
         this.communityDir = communityDir;
     }
     
+    @Override
+    public String toString()
+    {
+        return String.valueOf(id);
+    }
     
 }

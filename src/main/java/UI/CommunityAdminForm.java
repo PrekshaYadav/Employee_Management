@@ -4,6 +4,12 @@
  */
 package UI;
 
+import Beans.CityDirectory;
+import Beans.DoctorDirectory;
+import Beans.HospitalDirectory;
+import Beans.PatientDirectory;
+import Beans.PersonDirectory;
+
 /**
  *
  * @author preks
@@ -13,9 +19,27 @@ public class CommunityAdminForm extends javax.swing.JFrame {
     /**
      * Creates new form CommunityAdminForm
      */
+    
+    HospitalDirectory hospitalDirectory;
+    DoctorDirectory doctorDirectory;
+    PatientDirectory patientDirector;
+    PersonDirectory personDirectory;
+    CityDirectory cityDirectory;
+
+    public CommunityAdminForm(HospitalDirectory hospitalDirectory, DoctorDirectory doctorDirectory, PatientDirectory patientDirector, PersonDirectory personDirectory, CityDirectory cityDirectory) {
+        this.hospitalDirectory = hospitalDirectory;
+        this.doctorDirectory = doctorDirectory;
+        this.patientDirector = patientDirector;
+        this.personDirectory = personDirectory;
+        this.cityDirectory = cityDirectory;
+        initComponents();
+    }
+ 
     public CommunityAdminForm() {
         initComponents();
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -129,13 +153,13 @@ public class CommunityAdminForm extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        CommunityManagementPanel community = new CommunityManagementPanel();
+        CommunityManagementPanel community = new CommunityManagementPanel(cityDirectory);
         jSplitPane1.setRightComponent(community);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        CityManagementPanel city = new CityManagementPanel();
+        CityManagementPanel city = new CityManagementPanel(cityDirectory);
         jSplitPane1.setRightComponent(city);
     }//GEN-LAST:event_jButton1ActionPerformed
 

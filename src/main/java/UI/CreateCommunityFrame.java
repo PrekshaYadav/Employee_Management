@@ -4,6 +4,11 @@
  */
 package UI;
 
+import Beans.City;
+import Beans.CityDirectory;
+import Beans.Community;
+import java.util.ArrayList;
+
 /**
  *
  * @author preks
@@ -13,6 +18,14 @@ public class CreateCommunityFrame extends javax.swing.JFrame {
     /**
      * Creates new form CreateCommunityFrame
      */
+    CityDirectory cityDirectory;
+
+    public CreateCommunityFrame(CityDirectory cityDirectory) {
+        this.cityDirectory = cityDirectory;
+        initComponents();
+
+    }
+    
     public CreateCommunityFrame() {
         initComponents();
     }
@@ -42,7 +55,7 @@ public class CreateCommunityFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Name");
 
-        jLabel2.setText("ID");
+        jLabel2.setText("Zipcode");
 
         jLabel5.setText("City");
 
@@ -165,6 +178,23 @@ public class CreateCommunityFrame extends javax.swing.JFrame {
     private void bt_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_createActionPerformed
         // TODO add your handling code here:
 
+            Community community = new Community();
+            
+            community.setZipcode(Integer.parseInt(txt_id.getText()));
+            community.setName(tct_name.getText());
+            community.setCountry(txt_country.getText());
+            String cityTxt = txt_city.getText();
+            community.setCity(cityTxt);
+            for(City city : cityDirectory.getCityDirectory())
+            {
+                if(city.getName().equals(cityTxt))
+                {
+                    ArrayList<Community> communityDir = city.getCommunityDir();
+                    communityDir.add(community);
+                    city.setCommunityDir(communityDir);
+                }
+            }
+            dispose();
     }//GEN-LAST:event_bt_createActionPerformed
 
     /**
@@ -203,8 +233,6 @@ public class CreateCommunityFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bt_back;
-    private javax.swing.JButton bt_back1;
     private javax.swing.JButton bt_back2;
     private javax.swing.JButton bt_create;
     private javax.swing.JLabel jLabel1;

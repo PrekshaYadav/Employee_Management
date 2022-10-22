@@ -4,6 +4,8 @@
  */
 package UI;
 
+import Beans.*;
+
 /**
  *
  * @author preks
@@ -13,10 +15,25 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form LoginFrame
      */
+    
+    HospitalDirectory hospitalDirectory;
+    DoctorDirectory doctorDirectory;
+    PatientDirectory patientDirectory;
+    PersonDirectory personDirectory;
+    CityDirectory  cityDirectory;
+    
     public MainFrame() {
         initComponents();
+        hospitalDirectory = new HospitalDirectory();
+        doctorDirectory = new DoctorDirectory();
+        patientDirectory = new PatientDirectory();
+        personDirectory = new PersonDirectory();
+        cityDirectory = new CityDirectory();
     }
 
+    
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -138,48 +155,39 @@ public class MainFrame extends javax.swing.JFrame {
         String password = txt_password.getText();
         if(role.equals("System Admin"))
         {
-            System.out.println(username);
-            System.out.println(password);
             if(username.equals("sysadmin") && password.equals("password"))
             {
-            System.out.println(role);
             dispose();
-            SystemAdminForm systemAdminForm = new SystemAdminForm();
+            SystemAdminForm systemAdminForm = new SystemAdminForm(hospitalDirectory, doctorDirectory, patientDirectory, personDirectory);
             systemAdminForm.show();
             }
         }
         
         else if(role.equals("Hospital Admin"))
         {
-            System.out.println(username);
-            System.out.println(password);
+            
             if(username.equals("hosadmin") && password.equals("password"))
             {
-            System.out.println(role);
             dispose();
-            HospitalAdminForm hospitalAdmin = new HospitalAdminForm();
+            HospitalAdminForm hospitalAdmin = new HospitalAdminForm(hospitalDirectory, doctorDirectory, patientDirectory, personDirectory);
             hospitalAdmin.show();
         }
         }
         else if(role.equals("Community Admin"))
         {
-            System.out.println(username);
-            System.out.println(password);
+            
             if(username.equals("comadmin") && password.equals("password"))
             {
-            System.out.println(role);
             dispose();
-            CommunityAdminForm hospitalAdmin = new CommunityAdminForm();
+            CommunityAdminForm hospitalAdmin = new CommunityAdminForm(hospitalDirectory, doctorDirectory, patientDirectory, personDirectory, cityDirectory);
             hospitalAdmin.show();
             }
         }
         else if(role.equals("Doctor"))
         {
-            System.out.println(username);
-            System.out.println(password);
+           
             if(username.equals("docadmin") && password.equals("password"))
             {
-            System.out.println(role);
             dispose();
             DocterAdminFrame doctorAdmin = new DocterAdminFrame();
             doctorAdmin.show();
@@ -188,11 +196,9 @@ public class MainFrame extends javax.swing.JFrame {
         
         else if(role.equals("Patient"))
         {
-            System.out.println(username);
-            System.out.println(password);
+            
             if(username.equals("patadmin") && password.equals("password"))
             {
-            System.out.println(role);
             dispose();
             PatientForm patient = new PatientForm();
             patient.show();

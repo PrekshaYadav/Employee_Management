@@ -4,6 +4,11 @@
  */
 package UI;
 
+import Beans.DoctorDirectory;
+import Beans.HospitalDirectory;
+import Beans.PatientDirectory;
+import Beans.PersonDirectory;
+
 /**
  *
  * @author preks
@@ -13,6 +18,20 @@ public class SystemAdminForm extends javax.swing.JFrame {
     /**
      * Creates new form SystemAdminForm
      */
+    
+    HospitalDirectory hospitalDirectory;
+    DoctorDirectory doctorDirectory;
+    PatientDirectory patientDirectory;
+    PersonDirectory personDirectory;
+
+    public SystemAdminForm(HospitalDirectory hospitalDirectory, DoctorDirectory doctorDirectory, PatientDirectory patientDirectory, PersonDirectory personDirectory) {
+        this.hospitalDirectory = hospitalDirectory;
+        this.doctorDirectory = doctorDirectory;
+        this.patientDirectory = patientDirectory;
+        this.personDirectory = personDirectory;
+        initComponents();
+    }
+    
     public SystemAdminForm() {
         initComponents();
     }

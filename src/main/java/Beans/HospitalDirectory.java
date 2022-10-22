@@ -14,6 +14,11 @@ public class HospitalDirectory {
     
     private ArrayList<Hospital> hospitalDirectory;
 
+    public HospitalDirectory() {
+        this.hospitalDirectory = new  ArrayList<Hospital>();
+
+    }
+
     public ArrayList<Hospital> getHospitalDirectory() {
         return hospitalDirectory;
     }
@@ -22,9 +27,6 @@ public class HospitalDirectory {
         this.hospitalDirectory = hospitalDirectory;
     }
 
-    public HospitalDirectory(ArrayList<Hospital> hospitalDirectory) {
-        this.hospitalDirectory = hospitalDirectory;
-    }
-    
+  
     
 }

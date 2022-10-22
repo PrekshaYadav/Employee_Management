@@ -4,6 +4,13 @@
  */
 package UI;
 
+import Beans.City;
+import Beans.CityDirectory;
+import Beans.Community;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author preks
@@ -13,10 +20,18 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
     /**
      * Creates new form CommunityManagementPanel
      */
+    CityDirectory cityDirectory;
     public CommunityManagementPanel() {
         initComponents();
+        //populateTable();
     }
 
+    public CommunityManagementPanel(CityDirectory cityDirectory) {
+        initComponents();
+        
+        this.cityDirectory = cityDirectory;
+        //populateTable();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,8 +55,14 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txt_city = new javax.swing.JTextField();
+        bt_reload = new javax.swing.JButton();
 
         bt_view.setText("View");
+        bt_view.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_viewActionPerformed(evt);
+            }
+        });
 
         bt_create.setText("Create");
         bt_create.addActionListener(new java.awt.event.ActionListener() {
@@ -50,7 +71,7 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setText("ID");
+        jLabel2.setText("Zipcode");
 
         jLabel4.setText("Country");
 
@@ -100,6 +121,13 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
 
         jLabel5.setText("City");
 
+        bt_reload.setText("Reload");
+        bt_reload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_reloadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,27 +138,31 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tct_name, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_country, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(15, 15, 15)
-                            .addComponent(bt_create, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(bt_update, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(100, 100, 100)
-                            .addComponent(bt_view, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(181, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addComponent(bt_reload, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(bt_create, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(46, 46, 46)
+                                    .addComponent(bt_update, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(39, 39, 39)
+                                    .addComponent(bt_view, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tct_name, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_country, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,7 +175,8 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_create)
                     .addComponent(bt_update)
-                    .addComponent(bt_view))
+                    .addComponent(bt_view)
+                    .addComponent(bt_reload))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -166,7 +199,7 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
 
     private void bt_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_createActionPerformed
         // TODO add your handling code here:
-        CreateCommunityFrame community = new CreateCommunityFrame();
+        CreateCommunityFrame community = new CreateCommunityFrame(cityDirectory);
         community.show();
     }//GEN-LAST:event_bt_createActionPerformed
 
@@ -180,15 +213,100 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
 
     private void bt_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_updateActionPerformed
         // TODO add your handling code here:
+        
+        int id = Integer.parseInt(txt_id.getText());
+        String name = tct_name.getText();
+        String country = txt_country.getText();
+        String city = txt_city.getText();
+        System.out.println("##############1");
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        int selected_row = jTable1.getSelectedRow();
+        City citySelected = (City)model.getValueAt(selected_row, 3);
+        Community communitySelected = (Community)model.getValueAt(selected_row, 0);
+        System.out.println("##############2");
+
+        if(jTable1.getSelectedRowCount() == 1) {
+
+                    System.out.println("##############3");
+
+            int index = cityDirectory.getCityDirectory().indexOf(citySelected);
+            
+            ArrayList<Community> comDir = cityDirectory.getCityDirectory().get(index).getCommunityDir();
+                    System.out.println("##############4");
+
+            for(Community community: comDir)
+            {
+                System.out.println("##############5");
+
+                if(community.getName().equals(communitySelected.getName()))
+                {
+                    community.setName(name);
+                    System.out.println("#############################");
+                }
+                
+            }            
+        }
+        
+        
+        
+        System.out.println("##############6");
+        populateTable();
+     
     }//GEN-LAST:event_bt_updateActionPerformed
 
     private void txt_countryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_countryActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_countryActionPerformed
 
+    private void bt_viewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_viewActionPerformed
+        // TODO add your handling code here:
+        //populateTable();
+         int selected_row = jTable1.getSelectedRow();
+        if(selected_row < 0)
+        {
+            JOptionPane.showMessageDialog( this, "Please select a row to view");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        Community community = (Community)model.getValueAt(selected_row, 0);
+        
+        txt_id.setText(String.valueOf(community.getZipcode()));
+        tct_name.setText(community.getName());
+        txt_country.setText(community.getCountry());
+        txt_city.setText(community.getCity());
+        
+
+    }//GEN-LAST:event_bt_viewActionPerformed
+
+    private void bt_reloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_reloadActionPerformed
+        // TODO add your handling code here:
+        populateTable();
+    }//GEN-LAST:event_bt_reloadActionPerformed
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        for(City c: cityDirectory.getCityDirectory())
+        {
+            ArrayList<Community> comDir = c.getCommunityDir();
+            for(Community a : comDir)
+            {
+                Object[] row = new Object[4];
+                row[0] = a;
+                row[1] = a.getName();
+                row[2] = a.getCountry();
+                row[3] = c;
+                model.addRow(row);
+            }
+            
+        }
+        
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_create;
+    private javax.swing.JButton bt_reload;
     private javax.swing.JButton bt_update;
     private javax.swing.JButton bt_view;
     private javax.swing.JLabel jLabel1;

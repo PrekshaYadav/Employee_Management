@@ -4,12 +4,29 @@
  */
 package UI;
 
+import Beans.DoctorDirectory;
+import Beans.HospitalDirectory;
+import Beans.PatientDirectory;
+import Beans.PersonDirectory;
+
 /**
  *
  * @author preks
  */
 public class HospitalAdminForm extends javax.swing.JFrame {
 
+    HospitalDirectory hospitalDirectory;
+    DoctorDirectory doctorDirectory;
+    PatientDirectory patientDirectory;
+    PersonDirectory personDirectory;
+
+    public HospitalAdminForm(HospitalDirectory hospitalDirectory, DoctorDirectory doctorDirectory, PatientDirectory patientDirectory, PersonDirectory personDirectory) {
+        this.hospitalDirectory = hospitalDirectory;
+        this.doctorDirectory = doctorDirectory;
+        this.patientDirectory = patientDirectory;
+        this.personDirectory = personDirectory;
+        initComponents();
+    }
     /**
      * Creates new form HospitalAdminForm
      */

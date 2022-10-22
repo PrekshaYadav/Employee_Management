@@ -13,10 +13,11 @@ import java.util.ArrayList;
 public class PersonDirectory {
     private ArrayList<Person> personDirectory;
 
-    public PersonDirectory(ArrayList<Person> personDirectory) {
-        this.personDirectory = personDirectory;
+    public PersonDirectory() {
+        this.personDirectory = new  ArrayList<Person>();
     }
 
+    
     public ArrayList<Person> getPersonDirectory() {
         return personDirectory;
     }

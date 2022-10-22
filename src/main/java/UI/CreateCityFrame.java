@@ -4,6 +4,9 @@
  */
 package UI;
 
+import Beans.City;
+import Beans.CityDirectory;
+
 /**
  *
  * @author preks
@@ -13,6 +16,12 @@ public class CreateCityFrame extends javax.swing.JFrame {
     /**
      * Creates new form CreatePanelFrame
      */
+    CityDirectory cityDirectory;
+
+    public CreateCityFrame(CityDirectory cityDirectory) {
+        this.cityDirectory = cityDirectory;
+        initComponents();
+    }
     public CreateCityFrame() {
         initComponents();
     }
@@ -137,7 +146,17 @@ public class CreateCityFrame extends javax.swing.JFrame {
 
     private void bt_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_createActionPerformed
         // TODO add your handling code here:
-
+        
+        int id = Integer.parseInt(txt_zip.getText());
+        String name = txt_city.getText();
+        String country = txt_country.getText();
+        City city = cityDirectory.addCity();
+        
+        city.setId(id);
+        city.setCountry(country);
+        city.setName(name);
+        
+        dispose();
     }//GEN-LAST:event_bt_createActionPerformed
 
     private void bt_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_backActionPerformed

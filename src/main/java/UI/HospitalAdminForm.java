@@ -172,7 +172,7 @@ public class HospitalAdminForm extends javax.swing.JFrame {
 
     private void bt_encounterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_encounterActionPerformed
         // TODO add your handling code here:
-        HAEncounterManagementPanel encounterManagement = new HAEncounterManagementPanel();
+        HAEncounterManagementPanel encounterManagement = new HAEncounterManagementPanel(patientDirectory, cityDirectory);
         jSplitPane1.setRightComponent(encounterManagement);
     }//GEN-LAST:event_bt_encounterActionPerformed
 

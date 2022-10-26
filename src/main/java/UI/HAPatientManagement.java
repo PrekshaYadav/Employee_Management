@@ -4,8 +4,11 @@
  */
 package UI;
 
+import Beans.City;
 import Beans.CityDirectory;
+import Beans.Community;
 import Beans.Doctor;
+import Beans.House;
 import Beans.Patient;
 import Beans.PatientDirectory;
 import javax.swing.JOptionPane;
@@ -306,8 +309,76 @@ public class HAPatientManagement extends javax.swing.JPanel {
 
     private void bt_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_updateActionPerformed
         // TODO add your handling code here:
+        //patientDirectory
         
-        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        int selected_row = jTable1.getSelectedRow();
+        Patient patientSelected = (Patient)model.getValueAt(selected_row, 0);
+        int flag = 0;
+        for(Patient patient: patientDirectory.getPatientDirectory())
+        {
+            if(patient.getId()==patientSelected.getId() )
+            { 
+                String cityTxt = txt_city.getText();
+                String comTxt = txt_community.getText();
+                String houseUpdate = txt_house.getText();
+                
+                for(City city: cityDirectory.getCityDirectory())
+                {
+                    if(city.getName().equals(cityTxt))
+                    {  
+                        for(Community com: city.getCommunityDir())
+                        {
+                            if(com.getName().equals(comTxt))
+                            {
+                                for(House house: com.getHouseDir())
+                                {
+                                    if(house.getName().equals(houseUpdate))
+                                    {
+                                        patient.setHouse(house);
+                                        patient.setCity(txt_city.getText());
+                                        patient.setCommunity(txt_community.getText());
+                                        flag++;
+                                        break;
+                                    }
+                                }
+                            }
+                            
+                            if(flag == 1)
+                                break;
+                        }   
+                    } 
+                    
+                    if(flag == 1)
+                       break;
+                }
+                
+                if(flag == 1)
+                {
+                    patient.setName(txt_name.getText());
+                   
+                    patient.setContactNo(Long.parseLong(txt_phone_no.getText()));
+
+                    patient.setUsername(txt_username.getText());
+                    patient.setPassword(txt_passsword.getText());
+                    patient.setId(Integer.parseInt(txt_id.getText()));
+                    patient.setAge(Integer.parseInt(txt_age.getText()));
+                    patient.setBloodGroup(txt_blood_group.getText());
+                    patient.setHeight(Float.parseFloat(txt_height.getText()));
+                    patient.setWeight(Float.parseFloat(txt_weight.getText()));
+                    patient.setHeartRate(Integer.parseInt(txt_heart_rate.getText()));
+                    JOptionPane.showMessageDialog(this, "Patient updated");
+
+                }
+                
+                else{
+                    JOptionPane.showMessageDialog(this, "Update failed, please enter correct address details");
+
+                }
+                
+            }
+        }
+        populateTable();
     }//GEN-LAST:event_bt_updateActionPerformed
 
     public void populateTable()
@@ -317,7 +388,7 @@ public class HAPatientManagement extends javax.swing.JPanel {
         
         for(Patient patient: patientDirectory.getPatientDirectory())
         {
-                Object[] row = new Object[7];
+                Object[] row = new Object[5];
                 row[0] = patient;
                 row[1] = patient.getName();
                 row[2] = patient.getCity();

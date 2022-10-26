@@ -4,6 +4,10 @@
  */
 package UI;
 
+import Beans.CityDirectory;
+import Beans.DoctorDirectory;
+import Beans.PatientDirectory;
+
 /**
  *
  * @author preks
@@ -13,8 +17,20 @@ public class HAEncounterManagementPanel extends javax.swing.JPanel {
     /**
      * Creates new form EncounterManagementPanel
      */
+    
+    PatientDirectory patientDirectory;
+    CityDirectory cityDirectory;
+    
     public HAEncounterManagementPanel() {
         initComponents();
+    }
+
+    HAEncounterManagementPanel(PatientDirectory patientDirectory, CityDirectory cityDirectory) {
+    
+        this.patientDirectory = patientDirectory;
+        this.cityDirectory =  cityDirectory;
+        initComponents();
+    
     }
 
     /**
@@ -207,7 +223,7 @@ public class HAEncounterManagementPanel extends javax.swing.JPanel {
 
     private void bt_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_createActionPerformed
         // TODO add your handling code here:
-        CreateEncounterFrame encounter = new CreateEncounterFrame();
+        CreateEncounterFrame encounter = new CreateEncounterFrame(patientDirectory, cityDirectory);
         encounter.show();
     }//GEN-LAST:event_bt_createActionPerformed
 

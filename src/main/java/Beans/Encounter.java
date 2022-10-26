@@ -18,6 +18,9 @@ public class Encounter {
     private Doctor doctor;
     private String finalComments;
 
+    public Encounter() {
+    }
+
     public Encounter(Date date, VitalSign vitalSign, Doctor doctor, String finalComments) {
         id ++;
         this.date = date;

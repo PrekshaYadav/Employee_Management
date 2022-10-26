@@ -16,6 +16,24 @@ public class Patient extends Person {
     private int bloodSugarLevel;
     private float weight;
     private float height;
+    private String username;
+    private String password;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     
     private EncounterDirectory encounterHistory;
 
@@ -26,6 +44,11 @@ public class Patient extends Person {
         this.weight = weight;
         this.height = height;
         this.encounterHistory = encounterHistory;
+    }
+
+    public Patient() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        encounterHistory = new EncounterDirectory();
     }
 
     public void setHeartRate(int heartRate) {
@@ -68,5 +91,9 @@ public class Patient extends Person {
         return encounterHistory;
     }
     
-    
+    @Override
+    public String toString()
+    {
+        return String.valueOf(id);
+    }
 }

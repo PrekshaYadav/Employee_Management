@@ -23,6 +23,7 @@ public class Community {
 
     public Community() {
         houseDir = new ArrayList<House>();
+        hospitalDirectory = new HospitalDirectory();
     }
     public Community(String name, int zipcode, ArrayList<House> houseDir, HospitalDirectory hospitalDirectory, String country, String city) {
         this.name = name;

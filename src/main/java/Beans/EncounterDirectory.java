@@ -11,6 +11,9 @@ import java.util.ArrayList;
  * @author preks
  */
 public class EncounterDirectory {
+
+    public EncounterDirectory() {
+    }
     
     private ArrayList<Encounter> encounterHistory;
 

@@ -31,6 +31,15 @@ public class MainFrame extends javax.swing.JFrame {
         cityDirectory = new CityDirectory();
     }
 
+    public MainFrame(HospitalDirectory hospitalDirectory, DoctorDirectory doctorDirectory, PatientDirectory patientDirectory, PersonDirectory personDirectory, CityDirectory cityDirectory) {
+        initComponents();
+        this.hospitalDirectory = hospitalDirectory;
+        this.doctorDirectory = doctorDirectory;
+        this.patientDirectory = patientDirectory;
+        this.personDirectory = personDirectory;
+        this.cityDirectory = cityDirectory;
+    }
+
     
 
     
@@ -169,7 +178,7 @@ public class MainFrame extends javax.swing.JFrame {
             if(username.equals("hosadmin") && password.equals("password"))
             {
             dispose();
-            HospitalAdminForm hospitalAdmin = new HospitalAdminForm(hospitalDirectory, doctorDirectory, patientDirectory, personDirectory);
+            HospitalAdminForm hospitalAdmin = new HospitalAdminForm(hospitalDirectory, doctorDirectory, patientDirectory, personDirectory, cityDirectory);
             hospitalAdmin.show();
         }
         }

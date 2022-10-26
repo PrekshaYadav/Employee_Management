@@ -22,14 +22,14 @@ public class CommunityAdminForm extends javax.swing.JFrame {
     
     HospitalDirectory hospitalDirectory;
     DoctorDirectory doctorDirectory;
-    PatientDirectory patientDirector;
+    PatientDirectory patientDirectory;
     PersonDirectory personDirectory;
     CityDirectory cityDirectory;
 
     public CommunityAdminForm(HospitalDirectory hospitalDirectory, DoctorDirectory doctorDirectory, PatientDirectory patientDirector, PersonDirectory personDirectory, CityDirectory cityDirectory) {
         this.hospitalDirectory = hospitalDirectory;
         this.doctorDirectory = doctorDirectory;
-        this.patientDirector = patientDirector;
+        this.patientDirectory = patientDirector;
         this.personDirectory = personDirectory;
         this.cityDirectory = cityDirectory;
         initComponents();
@@ -165,6 +165,9 @@ public class CommunityAdminForm extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+         dispose();
+        MainFrame mainFrame = new MainFrame(hospitalDirectory, doctorDirectory, patientDirectory, personDirectory, cityDirectory);
+        mainFrame.show();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**

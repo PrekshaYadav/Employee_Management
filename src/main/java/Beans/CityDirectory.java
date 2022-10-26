@@ -17,8 +17,6 @@ public class CityDirectory {
         this.cityDirectory = new  ArrayList<City>();
     }
 
-   
-
     public ArrayList<City> getCityDirectory() {
         return cityDirectory;
     }

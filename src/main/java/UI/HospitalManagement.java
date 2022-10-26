@@ -4,6 +4,7 @@
  */
 package UI;
 
+import Beans.CityDirectory;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -16,6 +17,14 @@ public class HospitalManagement extends javax.swing.JPanel {
     /**
      * Creates new form HospitalManagement
      */
+    
+    CityDirectory cityDirectory;
+
+    public HospitalManagement(CityDirectory cityDirectory) {
+        this.cityDirectory = cityDirectory;
+        initComponents();
+    }
+    
     public HospitalManagement() {
         initComponents();
     }
@@ -181,7 +190,7 @@ public class HospitalManagement extends javax.swing.JPanel {
 
     private void bt_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_createActionPerformed
         // TODO add your handling code here:
-        CreateHospitalFrame1 hospitalFrame = new CreateHospitalFrame1();
+        CreateHospitalFrame1 hospitalFrame = new CreateHospitalFrame1(cityDirectory);
         hospitalFrame.show();
     }//GEN-LAST:event_bt_createActionPerformed
 

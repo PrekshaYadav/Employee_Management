@@ -12,12 +12,58 @@ import java.util.Date;
  */
 public class Person {
     
-    static int id;
+    int id;
     String name;
     int age;
     String gender;
     long contactNo;
     Date dateOfBirth;
+    String city;
+    String community;
+
+    public Person(int id, String name, int age, String gender, long contactNo, Date dateOfBirth, String city, String community, String bloodGroup, House house) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.contactNo = contactNo;
+        this.dateOfBirth = dateOfBirth;
+        this.city = city;
+        this.community = community;
+        this.bloodGroup = bloodGroup;
+        this.house = house;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(String community) {
+        this.community = community;
+    }
+    
+    public Person(int id, String name, int age, String gender, long contactNo, Date dateOfBirth, String bloodGroup, House house) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.contactNo = contactNo;
+        this.dateOfBirth = dateOfBirth;
+        this.bloodGroup = bloodGroup;
+        this.house = house;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     String bloodGroup;
     House house;
 
@@ -25,7 +71,7 @@ public class Person {
     }
 
     public Person(String name, int age, String gender, long contactNo, Date dateOfBirth, String bloodGroup, House house) {
-        id++;
+        
         this.name = name;
         this.age = age;
         this.gender = gender;

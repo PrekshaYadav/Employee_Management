@@ -16,8 +16,50 @@ public class Doctor extends Person{
     private String specialization;
     private int experience;
     private String license;
+    private String hospital;
+    private String username;
+    private String password;
+
+    public Doctor(String specialization, int experience, String license, String hospital, String username, String password, ArrayList<VitalSign> vitalSigns, int id, String name, int age, String gender, long contactNo, Date dateOfBirth, String city, String community, String bloodGroup, House house) {
+        super(id, name, age, gender, contactNo, dateOfBirth, city, community, bloodGroup, house);
+        this.specialization = specialization;
+        this.experience = experience;
+        this.license = license;
+        this.hospital = hospital;
+        this.username = username;
+        this.password = password;
+        this.vitalSigns = vitalSigns;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     
+    
+
+    public String getHospital() {
+        return hospital;
+    }
+
+    public void setHospital(String hospital) {
+        this.hospital = hospital;
+    }
     private ArrayList<VitalSign> vitalSigns;
+
+    public Doctor() {
+    }
 
     public Doctor(String specialization, int experience, String license, ArrayList<VitalSign> vitalSigns, String name, int age, String gender, long contactNo, Date dateOfBirth, String bloodGroup, House house) {
         super(name, age, gender, contactNo, dateOfBirth, bloodGroup, house);
@@ -67,4 +109,11 @@ public class Doctor extends Person{
     public String getLicense() {
         return license;
     }
+    
+    @Override
+    public String toString()
+    {
+        return String.valueOf(id);
+    }
+    
 }

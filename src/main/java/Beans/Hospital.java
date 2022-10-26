@@ -4,19 +4,45 @@
  */
 package Beans;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author preks
  */
 public class Hospital {
+
+   
     
     private String name;
     private Long phoneNo;
-    private static int id = 0;
+    private int id = 0;
+    private String city;
+    private String community;
     private DoctorDirectory docterDirector;
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(String community) {
+        this.community = community;
+    }
+
+     public Hospital() {
+         docterDirector = new DoctorDirectory();
+    }
+    
     public Hospital(String name, Long phoneNo, DoctorDirectory docterDirector) {
-        id++;
+       
         this.name = name;
         this.phoneNo = phoneNo;
         this.docterDirector = docterDirector;
@@ -38,12 +64,12 @@ public class Hospital {
         this.phoneNo = phoneNo;
     }
 
-    public static int getId() {
+    public  int getId() {
         return id;
     }
 
-    public static void setId(int id) {
-        Hospital.id = id;
+    public  void setId(int id) {
+        this.id = id;
     }
 
     public DoctorDirectory getDocterDirector() {
@@ -54,6 +80,10 @@ public class Hospital {
         this.docterDirector = docterDirector;
     }
     
-    
+    @Override
+    public String toString()
+    {
+        return String.valueOf(id);
+    }
     
 }

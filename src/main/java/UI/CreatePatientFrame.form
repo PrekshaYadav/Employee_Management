@@ -23,48 +23,74 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="602" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="bt_create1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="bt_create" min="-2" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace pref="28" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel1" alignment="1" min="-2" pref="602" max="-2" attributes="0"/>
+                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="start_date1" pref="91" max="32767" attributes="0"/>
+                              <Component id="jLabel14" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jLabel17" min="-2" pref="94" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txt_weight" min="-2" pref="140" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="txt_heratRate" min="-2" pref="88" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jLabel16" min="-2" pref="94" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txt_height" min="-2" pref="140" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabel2" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="jLabel3" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="jLabel4" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="jLabel5" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel7" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="jLabel8" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="jLabel9" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="jLabel10" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="jLabel11" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="bt_create1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txt_id" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
+                                  <Component id="txt_name" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
+                                  <Component id="txt_city" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
+                                  <Component id="txt_community" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
+                                  <Component id="txt_house" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
+                                  <Component id="txt_age" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
+                                  <Component id="txt_username" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
+                                  <Component id="txt_phone_no" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
+                                  <Component id="txt_blood_group" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
+                                  <Component id="txt_passsword" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="bt_create" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel2" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-                          <Component id="jLabel8" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-                          <Component id="jLabel9" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-                          <Component id="jLabel10" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-                          <Component id="jLabel11" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabel12" min="-2" pref="85" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txt_id" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
-                          <Component id="txt_name" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
-                          <Component id="txt_city" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
-                          <Component id="txt_community" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
-                          <Component id="txt_house" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
-                          <Component id="txt_age" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
-                          <Component id="txt_username" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
-                          <Component id="txt_phone_no" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
-                          <Component id="txt_blood_group" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
-                          <Component id="txt_passsword" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="txt_gender" min="-2" pref="340" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -123,12 +149,42 @@
                   <Component id="jLabel11" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="txt_passsword" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="bt_create" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bt_create1" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="txt_gender" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel12" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="345" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txt_weight" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel17" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jDateChooser1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="start_date1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txt_heratRate" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_height" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel16" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel14" min="-2" pref="25" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="bt_create1" min="-2" max="-2" attributes="0"/>
+                  <Component id="bt_create" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="214" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -203,6 +259,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Create"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_createActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_house">
     </Component>
@@ -234,6 +293,57 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_create1ActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="start_date1">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="2"/>
+        <Property name="text" type="java.lang.String" value="Date of Birth"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="start_date1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel12">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Gender"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_gender">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_genderActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel14">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Heart Rate "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_heratRate">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_heratRateActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_height">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_heightActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel16">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Height"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txt_weight">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_weightActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel17">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Weight"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -4,6 +4,7 @@
  */
 package UI;
 
+import Beans.CityDirectory;
 import Beans.DoctorDirectory;
 import Beans.HospitalDirectory;
 import Beans.PatientDirectory;
@@ -19,12 +20,14 @@ public class HospitalAdminForm extends javax.swing.JFrame {
     DoctorDirectory doctorDirectory;
     PatientDirectory patientDirectory;
     PersonDirectory personDirectory;
+    CityDirectory cityDirectory;
 
-    public HospitalAdminForm(HospitalDirectory hospitalDirectory, DoctorDirectory doctorDirectory, PatientDirectory patientDirectory, PersonDirectory personDirectory) {
+    public HospitalAdminForm(HospitalDirectory hospitalDirectory, DoctorDirectory doctorDirectory, PatientDirectory patientDirectory, PersonDirectory personDirectory, CityDirectory cityDirectory) {
         this.hospitalDirectory = hospitalDirectory;
         this.doctorDirectory = doctorDirectory;
         this.patientDirectory = patientDirectory;
         this.personDirectory = personDirectory;
+        this.cityDirectory = cityDirectory;
         initComponents();
     }
     /**
@@ -151,19 +154,19 @@ public class HospitalAdminForm extends javax.swing.JFrame {
 
     private void bt_hospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_hospitalActionPerformed
         // TODO add your handling code here:
-        HAEncounterManagementPanel encounterManagement = new HAEncounterManagementPanel();
+        HAHospitalManagement encounterManagement = new HAHospitalManagement(cityDirectory);
         jSplitPane1.setRightComponent(encounterManagement);
     }//GEN-LAST:event_bt_hospitalActionPerformed
 
     private void bt_patientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_patientActionPerformed
         // TODO add your handling code here:
-        HAPatientManagement patientManagement = new HAPatientManagement();
+        HAPatientManagement patientManagement = new HAPatientManagement(cityDirectory ,patientDirectory);
         jSplitPane1.setRightComponent(patientManagement);
     }//GEN-LAST:event_bt_patientActionPerformed
 
     private void bt_doctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_doctorActionPerformed
         // TODO add your handling code here:
-        HADoctorManagementPanel doc = new HADoctorManagementPanel();
+        HADoctorManagementPanel doc = new HADoctorManagementPanel(cityDirectory);
         jSplitPane1.setRightComponent(doc);
     }//GEN-LAST:event_bt_doctorActionPerformed
 
@@ -176,7 +179,7 @@ public class HospitalAdminForm extends javax.swing.JFrame {
     private void bt_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_logoutActionPerformed
         // TODO add your handling code here:
         dispose();
-        MainFrame mainFrame = new MainFrame();
+        MainFrame mainFrame = new MainFrame(hospitalDirectory, doctorDirectory, patientDirectory, personDirectory, cityDirectory);
         mainFrame.show();
     }//GEN-LAST:event_bt_logoutActionPerformed
 

@@ -14,6 +14,9 @@ public class VitalSign {
     private String symptom;
     private int severity;
 
+    public VitalSign() {
+    }
+
     public int getId() {
         return id;
     }
@@ -42,6 +45,13 @@ public class VitalSign {
 
     public void setSeverity(int severity) {
         this.severity = severity;
+    }
+    
+    
+    @Override
+    public String toString()
+    {
+        return String.valueOf(id);
     }
     
 }

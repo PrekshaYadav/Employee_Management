@@ -8,11 +8,13 @@ import Beans.City;
 import Beans.CityDirectory;
 import Beans.Community;
 import Beans.Doctor;
+import Beans.DoctorDirectory;
 import Beans.Encounter;
 import Beans.EncounterDirectory;
 import Beans.Hospital;
 import Beans.Patient;
 import Beans.PatientDirectory;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -26,22 +28,25 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author preks
  */
-public class EncounterManagementPanel extends javax.swing.JPanel {
+public class DoctorEncounterManagementPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form EncounterManagementPanel
      */
-    CityDirectory cityDirectory;
+    
     PatientDirectory patientDirectory;
+    CityDirectory cityDirectory;
     String selectedPatientName;
-    public EncounterManagementPanel() {
+    Doctor doctor;
+    public DoctorEncounterManagementPanel() {
         initComponents();
     }
 
-    EncounterManagementPanel(CityDirectory cityDirectory, PatientDirectory patientDirectory) {
-        initComponents();
-        this.cityDirectory = cityDirectory;
+    DoctorEncounterManagementPanel(PatientDirectory patientDirectory, CityDirectory cityDirectory) {
+    
         this.patientDirectory = patientDirectory;
+        this.cityDirectory =  cityDirectory;
+        initComponents();
         
         ArrayList<Patient> pat = patientDirectory.getPatientDirectory();
         
@@ -51,6 +56,30 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
         }
         jComboBox1.setModel(new DefaultComboBoxModel<String>(patNames.toArray(new String[0])));
         
+        
+        
+    
+    }
+
+   
+
+    DoctorEncounterManagementPanel(CityDirectory cityDirectory, PatientDirectory patientDirectory, Doctor doctor) {
+        initComponents();
+ 
+        this.cityDirectory = cityDirectory;
+        this.patientDirectory = patientDirectory;
+        this.doctor = doctor;
+        
+        ArrayList<Patient> pat = patientDirectory.getPatientDirectory();
+        ArrayList<String> patNames = new ArrayList<>();
+        for(Patient patient:pat){
+            for(Encounter e:patient.getEncounter().getEncounterHistory()){
+                    if(e.getDoctor() == doctor)
+                    {patNames.add(patient.getName());}
+        }
+//            patNames.add(patient.getName());
+        }
+        jComboBox1.setModel(new DefaultComboBoxModel<String>(patNames.toArray(new String[0])));
         
     }
 
@@ -67,7 +96,6 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
         txt_doctor = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -77,11 +105,11 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
         txt_id = new javax.swing.JTextField();
         txt_final_Comments = new javax.swing.JTextField();
         txt_vitalSign = new javax.swing.JTextField();
-        bt_view2 = new javax.swing.JButton();
-        bt_delete = new javax.swing.JButton();
         bt_update = new javax.swing.JButton();
+        bt_view = new javax.swing.JButton();
         bt_create = new javax.swing.JButton();
-        bt_view1 = new javax.swing.JButton();
+        bt_reload = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -108,18 +136,6 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox1ItemStateChanged(evt);
-            }
-        });
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Date");
 
         jLabel6.setText("Final Comments");
@@ -136,24 +152,17 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
             }
         });
 
-        bt_view2.setText("View");
-        bt_view2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_view2ActionPerformed(evt);
-            }
-        });
-
-        bt_delete.setText("Delete");
-        bt_delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_deleteActionPerformed(evt);
-            }
-        });
-
         bt_update.setText("Update");
         bt_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_updateActionPerformed(evt);
+            }
+        });
+
+        bt_view.setText("View");
+        bt_view.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_viewActionPerformed(evt);
             }
         });
 
@@ -164,10 +173,17 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
             }
         });
 
-        bt_view1.setText("Reload");
-        bt_view1.addActionListener(new java.awt.event.ActionListener() {
+        bt_reload.setText("Reload");
+        bt_reload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_view1ActionPerformed(evt);
+                bt_reloadActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
             }
         });
 
@@ -176,19 +192,26 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(bt_create, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(41, 41, 41)
+                                        .addComponent(bt_update, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(bt_view, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18))
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -201,17 +224,9 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
                                             .addComponent(txt_vitalSign, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txt_doctor, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txt_final_Comments, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(bt_create)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(bt_view2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(bt_delete)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(bt_update)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(bt_view1))))
+                                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(bt_reload, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -228,11 +243,10 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt_view2)
-                    .addComponent(bt_create)
                     .addComponent(bt_update)
-                    .addComponent(bt_delete)
-                    .addComponent(bt_view1))
+                    .addComponent(bt_view)
+                    .addComponent(bt_create)
+                    .addComponent(bt_reload))
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -263,83 +277,11 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
 
         populatTable();
         System.out.println("############### ItemState"+selectedPatientName);
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_idActionPerformed
-
-    private void bt_view2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_view2ActionPerformed
-        // TODO add your handling code here:
-        
-        int selectedRowIndex = jTable1.getSelectedRow();
-        
-        if (selectedRowIndex<0){
-            JOptionPane.showMessageDialog(this, "Please select a row to View");
-            return;   
-        }
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        Encounter encounterInfo = (Encounter) model.getValueAt(selectedRowIndex, 0);
-        txt_id.setText(String.valueOf(encounterInfo.getId()));
-        
-//        jDateChooser1.setDate(Date.from(encounterInfo.getDate()).atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        jDateChooser1.setDate(Date.from(encounterInfo.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        //txt_date.setDate(String.valueOf(encounterInfo.getDate()));
-        txt_doctor.setText(encounterInfo.getDoctor().getName());
-        txt_final_Comments.setText(encounterInfo.getFinalComments());
-        
-        
-    }//GEN-LAST:event_bt_view2ActionPerformed
-
-    private void bt_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_deleteActionPerformed
-        // TODO add your handling code here:
-         int selectedRowIndex = jTable1.getSelectedRow();
-        
-        if (selectedRowIndex<0){
-            JOptionPane.showMessageDialog(this, "Please select a row to delete");
-            return;
-           
-        }
-        
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        int selected_row = jTable1.getSelectedRow();
-        Encounter encounterInfo = (Encounter)model.getValueAt(selected_row, 0);
-        for(Patient patient: patientDirectory.getPatientDirectory())
-        {
-            if(patient.getName().equals(selectedPatientName))
-            {
-                EncounterDirectory encDirector = patient.getEncounter();
-                encDirector.deleteEncounter(encounterInfo);
-                JOptionPane.showMessageDialog(this, "Encounter deleted");
-                break;
-            }
-        }
-        
-        populatTable();
-        
-    }//GEN-LAST:event_bt_deleteActionPerformed
-
-    private void bt_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_createActionPerformed
-        // TODO add your handling code here:
-        CreateEncounterFrame encounter = new CreateEncounterFrame(patientDirectory, cityDirectory );
-        encounter.show();
-    }//GEN-LAST:event_bt_createActionPerformed
-
-    private void bt_view1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_view1ActionPerformed
-        // TODO add your handling code here:
-        
-        populatTable();
-    }//GEN-LAST:event_bt_view1ActionPerformed
-
-    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-        // TODO add your handling code here:
-        selectedPatientName = jComboBox1.getSelectedItem().toString();
-
-        populatTable();
-        System.out.println("############### ItemState"+selectedPatientName);
-        
-    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void bt_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_updateActionPerformed
         // TODO add your handling code here:
@@ -408,15 +350,49 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
         else
             JOptionPane.showMessageDialog(this, "Invalid inputs");
         
-        populatTable();   
-        
+        populatTable();     
     }//GEN-LAST:event_bt_updateActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void bt_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_createActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        CreateEncounterFrame encounter = new CreateEncounterFrame(patientDirectory, cityDirectory);
+        encounter.show();
+    }//GEN-LAST:event_bt_createActionPerformed
 
-    
+    private void bt_reloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_reloadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_reloadActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        // TODO add your handling code here:
+        
+        selectedPatientName = jComboBox1.getSelectedItem().toString();
+        System.out.println("############### ItemState"+selectedPatientName);
+        populatTable();
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void bt_viewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_viewActionPerformed
+        // TODO add your handling code here:
+        
+         int selectedRowIndex = jTable1.getSelectedRow();
+        
+        if (selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this, "Please select a row to View");
+            return;   
+        }
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        Encounter encounterInfo = (Encounter) model.getValueAt(selectedRowIndex, 0);
+        txt_id.setText(String.valueOf(encounterInfo.getId()));
+        
+//        jDateChooser1.setDate(Date.from(encounterInfo.getDate()).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        jDateChooser1.setDate(Date.from(encounterInfo.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        //txt_date.setDate(String.valueOf(encounterInfo.getDate()));
+        txt_doctor.setText(encounterInfo.getDoctor().getName());
+        txt_final_Comments.setText(encounterInfo.getFinalComments());
+        
+    }//GEN-LAST:event_bt_viewActionPerformed
+
+
     public void populatTable()
     {
         //jComboBox1.setModel(new DefaultComboBoxModel<String>(patientDirectory.toArray(new String[0])));
@@ -433,6 +409,8 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
                 EncounterDirectory encounterDir = patient.getEncounter();
                 for(Encounter encounter: encounterDir.getEncounterHistory())
                 {
+                    if(encounter.getDoctor().hashCode() == doctor.hashCode())
+                    {
                     System.out.println("###############populate table 4");
                     Object[] row = new Object[4];
                     row[0] = encounter;
@@ -440,19 +418,17 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
                     row[2] = encounter.getDoctor().getName();
                     row[3] = encounter.getFinalComments();
                     model.addRow(row);
+                    }
                 }
             }
         }
         
     }
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_create;
-    private javax.swing.JButton bt_delete;
+    private javax.swing.JButton bt_reload;
     private javax.swing.JButton bt_update;
-    private javax.swing.JButton bt_view1;
-    private javax.swing.JButton bt_view2;
+    private javax.swing.JButton bt_view;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;

@@ -59,6 +59,7 @@ public class Doctor extends Person{
     private ArrayList<VitalSign> vitalSigns;
 
     public Doctor() {
+        vitalSigns = new ArrayList<VitalSign>();
     }
 
     public Doctor(String specialization, int experience, String license, ArrayList<VitalSign> vitalSigns, String name, int age, String gender, long contactNo, Date dateOfBirth, String bloodGroup, House house) {

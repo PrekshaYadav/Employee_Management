@@ -5,6 +5,7 @@
 package UI;
 
 import Beans.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -194,13 +195,37 @@ public class MainFrame extends javax.swing.JFrame {
         }
         else if(role.equals("Doctor"))
         {
-           
-            if(username.equals("docadmin") && password.equals("password"))
+            int flag = 0;
+            for(City city: cityDirectory.getCityDirectory())
+            {
+                for(Community com: city.getCommunityDir())
+                {
+                    for(Hospital hosp: com.getHospitalDirectory().getHospitalDirectory())
+                    {
+                        for(Doctor doc : hosp.getDocterDirector().getDocterDirectory())
+                        {
+                            if(doc.getUsername().equals(username) && doc.getPassword().equals(password))
+                            {
+                                dispose();
+                                DocterAdminFrame doctorAdmin = new DocterAdminFrame(hospitalDirectory, doctorDirectory, patientDirectory, personDirectory, cityDirectory, doc);
+                                doctorAdmin.show();
+                                flag =1;
+                                break;
+                            }
+                        }
+                        
+                    }
+                }
+            }
+            if(flag == 0)
+              JOptionPane.showMessageDialog(this, "Invalid credentials");  
+            
+            /*if(username.equals("docadmin") && password.equals("password"))
             {
             dispose();
-            DocterAdminFrame doctorAdmin = new DocterAdminFrame();
+            DocterAdminFrame doctorAdmin = new DocterAdminFrame(hospitalDirectory, doctorDirectory, patientDirectory, personDirectory, cityDirectory);
             doctorAdmin.show();
-            }
+            }*/
         }
         
         else if(role.equals("Patient"))

@@ -4,6 +4,17 @@
  */
 package UI;
 
+import Beans.City;
+import Beans.CityDirectory;
+import Beans.Community;
+import Beans.Doctor;
+import Beans.Hospital;
+import Beans.PatientDirectory;
+import Beans.PersonDirectory;
+import Beans.VitalSign;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author preks
@@ -13,8 +24,21 @@ public class VitalSignManagement extends javax.swing.JPanel {
     /**
      * Creates new form VitalSignManagement
      */
+    
+    PatientDirectory patientDirectory;
+    CityDirectory cityDirectory;
+    Doctor doctor;
+    
     public VitalSignManagement() {
         initComponents();
+    }
+
+    VitalSignManagement(CityDirectory cityDirectory, PatientDirectory patientDirectory, Doctor doctor) {
+        this.patientDirectory = patientDirectory;
+        this.cityDirectory = cityDirectory;   
+        this.doctor = doctor;
+        initComponents();
+        populateTable();
     }
 
     /**
@@ -38,6 +62,7 @@ public class VitalSignManagement extends javax.swing.JPanel {
         bt_update = new javax.swing.JButton();
         bt_view = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        bt_reload = new javax.swing.JButton();
 
         jLabel3.setText("Symptoms");
 
@@ -85,10 +110,22 @@ public class VitalSignManagement extends javax.swing.JPanel {
         });
 
         bt_view.setText("View");
+        bt_view.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_viewActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Vital Sign Management");
+
+        bt_reload.setText("Reload");
+        bt_reload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_reloadActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -112,10 +149,12 @@ public class VitalSignManagement extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(bt_create, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
+                        .addGap(39, 39, 39)
                         .addComponent(bt_update, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
-                        .addComponent(bt_view, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addComponent(bt_view, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(bt_reload, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -130,7 +169,8 @@ public class VitalSignManagement extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_create)
                     .addComponent(bt_update)
-                    .addComponent(bt_view))
+                    .addComponent(bt_view)
+                    .addComponent(bt_reload))
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,7 +189,7 @@ public class VitalSignManagement extends javax.swing.JPanel {
 
     private void bt_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_createActionPerformed
         // TODO add your handling code here:
-        CreateVitalSign vitalSign = new CreateVitalSign();
+        CreateVitalSign vitalSign = new CreateVitalSign(cityDirectory, patientDirectory, doctor);
         vitalSign.show();
     }//GEN-LAST:event_bt_createActionPerformed
 
@@ -163,11 +203,85 @@ public class VitalSignManagement extends javax.swing.JPanel {
 
     private void bt_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_updateActionPerformed
         // TODO add your handling code here:
+        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        int selected_row = jTable1.getSelectedRow();
+        VitalSign vs = (VitalSign)model.getValueAt(selected_row, 0);
+        int flag = 0;
+        
+        if(jTable1.getSelectedRowCount() == 1) {
+            //int index = history.getHistory().indexOf(emp_Selected);        
+            for(City city: cityDirectory.getCityDirectory())
+            {
+                for(Community com: city.getCommunityDir())
+                {
+                    for(Hospital hosp: com.getHospitalDirectory().getHospitalDirectory())
+                    {
+                        for(Doctor doc : hosp.getDocterDirector().getDocterDirectory())
+                        {
+                            if(doc.hashCode() == doctor.hashCode())
+                            {
+                                int index = doc.getVitalSigns().indexOf(vs);
+                                doc.getVitalSigns().get(index).setSeverity(Integer.parseInt(txt_severity.getText()));
+                                doc.getVitalSigns().get(index).setSymptom(txt_symptoms.getText());
+                            }
+                        }
+                        if(flag == 1)
+                            break;
+                    }
+                }
+                if(flag == 1)
+                    break;
+            }
+        JOptionPane.showMessageDialog( this, "Vital Sign updated");      
+        }
+        populateTable();
     }//GEN-LAST:event_bt_updateActionPerformed
 
+    private void bt_reloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_reloadActionPerformed
+        // TODO add your handling code here:    
+        populateTable();
+    }//GEN-LAST:event_bt_reloadActionPerformed
 
+    private void bt_viewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_viewActionPerformed
+        // TODO add your handling code here:
+        int selected_row = jTable1.getSelectedRow();
+        if(selected_row < 0)
+        {
+            JOptionPane.showMessageDialog( this, "Please select a row to view");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        VitalSign vitalSign = (VitalSign)model.getValueAt(selected_row, 0);
+        
+        txt_id.setText(String.valueOf(vitalSign.getId()));
+        txt_symptoms.setText(vitalSign.getSymptom());
+        txt_severity.setText(String.valueOf(vitalSign.getSeverity()));
+        
+        
+        
+    }//GEN-LAST:event_bt_viewActionPerformed
+
+    
+    public void populateTable()
+    {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        
+        for(VitalSign vitalSign: doctor.getVitalSigns())
+        {
+                Object[] row = new Object[5];
+                row[0] = vitalSign;
+                row[1] = vitalSign.getSymptom();
+                row[2] = vitalSign.getSeverity();
+                model.addRow(row);
+        }
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_create;
+    private javax.swing.JButton bt_reload;
     private javax.swing.JButton bt_update;
     private javax.swing.JButton bt_view;
     private javax.swing.JLabel jLabel1;

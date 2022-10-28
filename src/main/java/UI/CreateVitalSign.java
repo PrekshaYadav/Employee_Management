@@ -4,6 +4,16 @@
  */
 package UI;
 
+import Beans.City;
+import Beans.CityDirectory;
+import Beans.Community;
+import Beans.Doctor;
+import Beans.Encounter;
+import Beans.Hospital;
+import Beans.PatientDirectory;
+import Beans.VitalSign;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author preks
@@ -13,8 +23,22 @@ public class CreateVitalSign extends javax.swing.JFrame {
     /**
      * Creates new form CreateVItalSign
      */
+    
+    PatientDirectory patientDirectory;
+    CityDirectory cityDirectory;
+    Doctor doctor;
+    
     public CreateVitalSign() {
         initComponents();
+    }
+
+    CreateVitalSign(CityDirectory cityDirectory, PatientDirectory patientDirectory, Doctor doctor) {
+
+        this.patientDirectory = patientDirectory;
+        this.cityDirectory = cityDirectory;     
+        this.doctor = doctor;
+        initComponents();
+
     }
 
     /**
@@ -137,6 +161,35 @@ public class CreateVitalSign extends javax.swing.JFrame {
 
     private void bt_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_createActionPerformed
         // TODO add your handling code here:
+        
+        VitalSign vs = new VitalSign();
+        vs.setId(Integer.parseInt(txt_id.getText()));
+        vs.setSeverity(Integer.parseInt(txt_severity.getText()));
+        vs.setSymptom(txt_symptoms.getText());
+        int flag = 0;
+        for(City city: cityDirectory.getCityDirectory())
+            {
+                for(Community com: city.getCommunityDir())
+                {
+                    for(Hospital hosp: com.getHospitalDirectory().getHospitalDirectory())
+                    {
+                        for(Doctor doc : hosp.getDocterDirector().getDocterDirectory())
+                        {
+                            if(doc.hashCode() == doctor.hashCode())
+                            {
+                                doc.getVitalSigns().add(vs);
+                                flag =1 ;
+                                break;
+                            }
+                        }
+                        if(flag == 1)
+                            break;
+                    }
+                }
+                if(flag == 1)
+                    break;
+            }
+        JOptionPane.showMessageDialog( this, "Vital Sign added");
     }//GEN-LAST:event_bt_createActionPerformed
 
     private void bt_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_backActionPerformed

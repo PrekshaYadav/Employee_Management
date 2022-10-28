@@ -190,7 +190,7 @@ public class SystemAdminForm extends javax.swing.JFrame {
     private void bt_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_logoutActionPerformed
         // TODO add your handling code here:
         dispose();
-        MainFrame mainFrame = new MainFrame();
+        MainFrame mainFrame = new MainFrame(hospitalDirectory, doctorDirectory, patientDirectory, personDirectory, cityDirectory);
         mainFrame.show();
     }//GEN-LAST:event_bt_logoutActionPerformed
 

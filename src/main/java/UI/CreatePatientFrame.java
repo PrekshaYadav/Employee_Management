@@ -397,7 +397,7 @@ public class CreatePatientFrame extends javax.swing.JFrame {
             }
         
         patientDirectory.getPatientDirectory().add(patient);
-        JOptionPane.showMessageDialog(this, "New Doctor Added");
+        JOptionPane.showMessageDialog(this, "New Patient Added");
 
         dispose();
     

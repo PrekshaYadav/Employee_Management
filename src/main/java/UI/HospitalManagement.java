@@ -338,7 +338,7 @@ public class HospitalManagement extends javax.swing.JPanel {
     private void bt_viewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_viewActionPerformed
         // TODO add your handling code here:
         
-         int selected_row = jTable1.getSelectedRow();
+        int selected_row = jTable1.getSelectedRow();
         if(selected_row < 0)
         {
             JOptionPane.showMessageDialog( this, "Please select a row to view");

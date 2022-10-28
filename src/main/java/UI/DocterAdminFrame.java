@@ -4,6 +4,13 @@
  */
 package UI;
 
+import Beans.CityDirectory;
+import Beans.Doctor;
+import Beans.DoctorDirectory;
+import Beans.HospitalDirectory;
+import Beans.PatientDirectory;
+import Beans.PersonDirectory;
+
 /**
  *
  * @author preks
@@ -13,10 +20,40 @@ public class DocterAdminFrame extends javax.swing.JFrame {
     /**
      * Creates new form DocterAdminFrame
      */
+    
+    HospitalDirectory hospitalDirectory;
+    DoctorDirectory doctorDirectory;
+    PatientDirectory patientDirectory;
+    PersonDirectory personDirectory;
+    CityDirectory cityDirectory;
+    Doctor doctor;
+
+    public DocterAdminFrame(HospitalDirectory hospitalDirectory, DoctorDirectory doctorDirectory, PatientDirectory patientDirectory, PersonDirectory personDirectory, CityDirectory cityDirectory) {
+        this.hospitalDirectory = hospitalDirectory;
+        this.doctorDirectory = doctorDirectory;
+        this.patientDirectory = patientDirectory;
+        this.personDirectory = personDirectory;
+        this.cityDirectory = cityDirectory;
+         initComponents();
+    }
+    
     public DocterAdminFrame() {
         initComponents();
     }
 
+    DocterAdminFrame(HospitalDirectory hospitalDirectory, DoctorDirectory doctorDirectory, PatientDirectory patientDirectory, PersonDirectory personDirectory, CityDirectory cityDirectory, Doctor doc) {
+    this.hospitalDirectory = hospitalDirectory;
+        this.doctorDirectory = doctorDirectory;
+        this.patientDirectory = patientDirectory;
+        this.personDirectory = personDirectory;
+        this.cityDirectory = cityDirectory;
+        this.doctor = doc;
+        initComponents();
+    
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -118,21 +155,21 @@ public class DocterAdminFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        HAEncounterManagementPanel encounterManagement = new HAEncounterManagementPanel();
+        DoctorEncounterManagementPanel encounterManagement = new DoctorEncounterManagementPanel(cityDirectory, patientDirectory, doctor);
         jSplitPane1.setRightComponent(encounterManagement);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        VitalSignManagement vitalSign = new VitalSignManagement();
+        VitalSignManagement vitalSign = new VitalSignManagement(cityDirectory, patientDirectory, doctor);
         jSplitPane1.setRightComponent(vitalSign);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void bt_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_logoutActionPerformed
         // TODO add your handling code here:
         dispose();
-        MainFrame mainFrame = new MainFrame();
+        MainFrame mainFrame = new MainFrame(hospitalDirectory, doctorDirectory, patientDirectory, personDirectory, cityDirectory);
         mainFrame.show();
     }//GEN-LAST:event_bt_logoutActionPerformed
 

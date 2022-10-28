@@ -28,5 +28,11 @@ public class HospitalDirectory {
     }
 
   
+    public void deleteHospital(Hospital hospital) {
+        
+        hospitalDirectory.remove(hospital);
+       
+    }
+    
     
 }

@@ -26,5 +26,10 @@ public class PatientDirectory {
         this.patientDirectory = patientDirectory;
     }
 
+    public void deletePatient(Patient patient) {
+        
+        patientDirectory.remove(patient);
+       
+    }
     
 }

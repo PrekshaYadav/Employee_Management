@@ -12,11 +12,14 @@ import java.util.ArrayList;
  */
 public class EncounterDirectory {
 
-    public EncounterDirectory() {
-    }
+    
     
     private ArrayList<Encounter> encounterHistory;
 
+    public EncounterDirectory() {
+        encounterHistory = new ArrayList<Encounter>();
+    }
+    
     public ArrayList<Encounter> getEncounterHistory() {
         return encounterHistory;
     }
@@ -29,6 +32,10 @@ public class EncounterDirectory {
         this.encounterHistory = encounterHistory;
     }
     
-    
+    public void deleteEncounter(Encounter encounter) {
+        
+        encounterHistory.remove(encounter);
+       
+    }
     
 }

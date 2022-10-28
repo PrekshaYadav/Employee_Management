@@ -4,6 +4,7 @@
  */
 package UI;
 
+import Beans.CityDirectory;
 import Beans.DoctorDirectory;
 import Beans.HospitalDirectory;
 import Beans.PatientDirectory;
@@ -23,6 +24,7 @@ public class SystemAdminForm extends javax.swing.JFrame {
     DoctorDirectory doctorDirectory;
     PatientDirectory patientDirectory;
     PersonDirectory personDirectory;
+    CityDirectory cityDirectory;
 
     public SystemAdminForm(HospitalDirectory hospitalDirectory, DoctorDirectory doctorDirectory, PatientDirectory patientDirectory, PersonDirectory personDirectory) {
         this.hospitalDirectory = hospitalDirectory;
@@ -33,6 +35,12 @@ public class SystemAdminForm extends javax.swing.JFrame {
     }
     
     public SystemAdminForm() {
+        initComponents();
+    }
+
+    SystemAdminForm(PatientDirectory patientDirectory, CityDirectory cityDirectory) {
+        this.patientDirectory = patientDirectory;
+        this.cityDirectory = cityDirectory;
         initComponents();
     }
 
@@ -156,26 +164,26 @@ public class SystemAdminForm extends javax.swing.JFrame {
 
     private void bt_encounterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_encounterActionPerformed
         // TODO add your handling code here:
-        EncounterManagementPanel encounterManagement = new EncounterManagementPanel();
+        EncounterManagementPanel encounterManagement = new EncounterManagementPanel(cityDirectory,patientDirectory);
         jSplitPane1.setRightComponent(encounterManagement);
     }//GEN-LAST:event_bt_encounterActionPerformed
 
     
     private void bt_hospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_hospitalActionPerformed
         // TODO add your handling code here:
-        HospitalManagement hospitalManagement = new HospitalManagement();
+        HospitalManagement hospitalManagement = new HospitalManagement( cityDirectory);
         jSplitPane1.setRightComponent(hospitalManagement);
     }//GEN-LAST:event_bt_hospitalActionPerformed
 
     private void bt_doctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_doctorActionPerformed
         // TODO add your handling code here:
-        DoctorManagementPanel doc = new DoctorManagementPanel();
+        DoctorManagementPanel doc = new DoctorManagementPanel(cityDirectory);
         jSplitPane1.setRightComponent(doc);
     }//GEN-LAST:event_bt_doctorActionPerformed
 
     private void bt_patientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_patientActionPerformed
         // TODO add your handling code here:
-        PatientManagement patientManagement = new PatientManagement();
+        PatientManagement patientManagement = new PatientManagement(cityDirectory, patientDirectory);
         jSplitPane1.setRightComponent(patientManagement);
     }//GEN-LAST:event_bt_patientActionPerformed
 

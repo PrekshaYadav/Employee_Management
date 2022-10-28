@@ -167,7 +167,7 @@ public class MainFrame extends javax.swing.JFrame {
             if(username.equals("sysadmin") && password.equals("password"))
             {
             dispose();
-            SystemAdminForm systemAdminForm = new SystemAdminForm(hospitalDirectory, doctorDirectory, patientDirectory, personDirectory);
+            SystemAdminForm systemAdminForm = new SystemAdminForm(  patientDirectory, cityDirectory);
             systemAdminForm.show();
             }
         }

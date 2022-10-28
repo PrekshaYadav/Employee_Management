@@ -28,4 +28,13 @@ public class DoctorDirectory {
         this.docterDirectory = docterDirectory;
     }
     
+    
+    public void deleteDoctor(Doctor doctor) {
+        
+        docterDirectory.remove(doctor);
+       
+    }
+    
+    
+    
 }

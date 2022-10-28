@@ -4,6 +4,7 @@
  */
 package Beans;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -12,8 +13,12 @@ import java.util.Date;
  */
 public class Encounter {
     
-    private static int id = 0;
-    private Date date;
+    private int id;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    private LocalDate date;
     private VitalSign vitalSign;
     private Doctor doctor;
     private String finalComments;
@@ -21,15 +26,15 @@ public class Encounter {
     public Encounter() {
     }
 
-    public Encounter(Date date, VitalSign vitalSign, Doctor doctor, String finalComments) {
-        id ++;
+    public Encounter(LocalDate date, VitalSign vitalSign, Doctor doctor, String finalComments) {
+        
         this.date = date;
         this.vitalSign = vitalSign;
         this.doctor = doctor;
         this.finalComments = finalComments;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -45,11 +50,11 @@ public class Encounter {
         this.finalComments = finalComments;
     }
 
-    public static int getId() {
+    public int getId() {
         return id;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -63,6 +68,12 @@ public class Encounter {
 
     public String getFinalComments() {
         return finalComments;
+    }
+    
+    @Override
+    public String toString()
+    {
+        return String.valueOf(id);
     }
     
 }

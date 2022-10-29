@@ -4,6 +4,16 @@
  */
 package UI;
 
+import Beans.CityDirectory;
+import Beans.Encounter;
+import Beans.EncounterDirectory;
+import Beans.Patient;
+import Beans.PatientDirectory;
+import java.time.ZoneId;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author preks
@@ -13,8 +23,19 @@ public class PatientEncounterManagementPanel extends javax.swing.JPanel {
     /**
      * Creates new form EncounterManagementPanel
      */
+    PatientDirectory patientDirectory;
+    CityDirectory cityDirectory;
+    Patient patientSelected;
     public PatientEncounterManagementPanel() {
         initComponents();
+    }
+
+    PatientEncounterManagementPanel(PatientDirectory patientDirectory, CityDirectory cityDirectory, Patient patient) {
+        initComponents();
+        this.patientDirectory = patientDirectory;
+        this.cityDirectory = cityDirectory;
+        this.patientSelected = patient;
+        populatTable();
     }
 
     /**
@@ -27,44 +48,51 @@ public class PatientEncounterManagementPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        bt_view = new javax.swing.JButton();
+        bt_reload = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        txt_id = new javax.swing.JTextField();
+        txt_final_Comments = new javax.swing.JTextField();
+        txt_vitalSign = new javax.swing.JTextField();
         txt_doctor = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        txt_id = new javax.swing.JTextField();
-        txt_final_Comments = new javax.swing.JTextField();
-        txt_date = new javax.swing.JTextField();
-        txt_vitalSign = new javax.swing.JTextField();
-        bt_view = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Appoinment Management");
 
+        bt_view.setText("View");
+        bt_view.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_viewActionPerformed(evt);
+            }
+        });
+
+        bt_reload.setText("Reload");
+        bt_reload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_reloadActionPerformed(evt);
+            }
+        });
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Date", "Vital Signs", "Doctor"
+                "Sr.no", "Date", "Doctor", "Final Comment"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
-
-        jLabel3.setText("Date");
-
-        jLabel6.setText("Final Comments");
-
-        jLabel2.setText("ID");
-
-        jLabel4.setText("Vital Sign");
 
         jLabel5.setText("Doctor");
 
@@ -74,13 +102,13 @@ public class PatientEncounterManagementPanel extends javax.swing.JPanel {
             }
         });
 
-        txt_date.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_dateActionPerformed(evt);
-            }
-        });
+        jLabel3.setText("Date");
 
-        bt_view.setText("View");
+        jLabel6.setText("Final Comments");
+
+        jLabel2.setText("ID");
+
+        jLabel4.setText("Vital Sign");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -94,9 +122,12 @@ public class PatientEncounterManagementPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bt_view, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
+                                .addComponent(bt_view, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38)
+                                .addComponent(bt_reload, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -106,11 +137,10 @@ public class PatientEncounterManagementPanel extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_date, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_vitalSign, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_doctor, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_final_Comments, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txt_final_Comments, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -118,18 +148,20 @@ public class PatientEncounterManagementPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(jLabel1)
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(bt_view)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_view)
+                    .addComponent(bt_reload))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -142,21 +174,71 @@ public class PatientEncounterManagementPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_final_Comments, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(340, Short.MAX_VALUE))
+                .addContainerGap(331, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bt_viewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_viewActionPerformed
+        // TODO add your handling code here:
+        
+            
+         int selectedRowIndex = jTable1.getSelectedRow();
+        
+        if (selectedRowIndex<0){
+            JOptionPane.showMessageDialog(this, "Please select a row to View");
+            return;   
+        }
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        Encounter encounterInfo = (Encounter) model.getValueAt(selectedRowIndex, 0);
+        txt_id.setText(String.valueOf(encounterInfo.getId()));
+        
+//        jDateChooser1.setDate(Date.from(encounterInfo.getDate()).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        jDateChooser1.setDate(Date.from(encounterInfo.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        //txt_date.setDate(String.valueOf(encounterInfo.getDate()));
+        txt_doctor.setText(encounterInfo.getDoctor().getName());
+        txt_final_Comments.setText(encounterInfo.getFinalComments());
+        txt_vitalSign.setText(encounterInfo.getVitalSign().getSymptom());
+    }//GEN-LAST:event_bt_viewActionPerformed
+
+    private void bt_reloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_reloadActionPerformed
+        // TODO add your handling code here:
+        populatTable();
+    }//GEN-LAST:event_bt_reloadActionPerformed
 
     private void txt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_idActionPerformed
 
-    private void txt_dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_dateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_dateActionPerformed
-
+    public void populatTable()
+    {
+        //jComboBox1.setModel(new DefaultComboBoxModel<String>(patientDirectory.toArray(new String[0])));
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        System.out.println("###############populate table 1");
+        String selectedPatientName = patientSelected.getName();
+        for(Patient patient: patientDirectory.getPatientDirectory())
+        {
+            if(patient.getName().equals(selectedPatientName))
+            {
+                EncounterDirectory encounterDir = patient.getEncounter();
+                for(Encounter encounter: encounterDir.getEncounterHistory())
+                {
+                    Object[] row = new Object[4];
+                    row[0] = encounter;
+                    row[1] = encounter.getDate();
+                    row[2] = encounter.getDoctor().getName();
+                    row[3] = encounter.getFinalComments();
+                    model.addRow(row);
+                }
+            }
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_reload;
     private javax.swing.JButton bt_view;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -165,7 +247,6 @@ public class PatientEncounterManagementPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField txt_date;
     private javax.swing.JTextField txt_doctor;
     private javax.swing.JTextField txt_final_Comments;
     private javax.swing.JTextField txt_id;

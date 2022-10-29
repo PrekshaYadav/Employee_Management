@@ -24,6 +24,7 @@ public class Encounter {
     private String finalComments;
 
     public Encounter() {
+        vitalSign = new VitalSign();
     }
 
     public Encounter(LocalDate date, VitalSign vitalSign, Doctor doctor, String finalComments) {

@@ -361,6 +361,7 @@ public class DoctorEncounterManagementPanel extends javax.swing.JPanel {
 
     private void bt_reloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_reloadActionPerformed
         // TODO add your handling code here:
+        populatTable();
     }//GEN-LAST:event_bt_reloadActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged

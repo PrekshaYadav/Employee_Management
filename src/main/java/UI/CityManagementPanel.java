@@ -47,12 +47,17 @@ public class CityManagementPanel extends javax.swing.JPanel {
         bt_create = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txt_zip = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         bt_view1 = new javax.swing.JButton();
+        label_id = new javax.swing.JLabel();
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        setBackground(new java.awt.Color(255, 255, 255));
+        setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        setForeground(new java.awt.Color(102, 102, 102));
+
+        jLabel1.setBackground(new java.awt.Color(174, 214, 253));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("City Management");
 
@@ -62,6 +67,7 @@ public class CityManagementPanel extends javax.swing.JPanel {
             }
         });
 
+        bt_update.setBackground(new java.awt.Color(195, 225, 255));
         bt_update.setText("Update");
         bt_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,6 +77,7 @@ public class CityManagementPanel extends javax.swing.JPanel {
 
         jLabel3.setText("City");
 
+        bt_view.setBackground(new java.awt.Color(195, 225, 255));
         bt_view.setText("View");
         bt_view.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,6 +85,7 @@ public class CityManagementPanel extends javax.swing.JPanel {
             }
         });
 
+        bt_create.setBackground(new java.awt.Color(195, 225, 255));
         bt_create.setText("Create");
         bt_create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,12 +97,7 @@ public class CityManagementPanel extends javax.swing.JPanel {
 
         jLabel4.setText("Country");
 
-        txt_zip.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_zipActionPerformed(evt);
-            }
-        });
-
+        jTable1.setBackground(new java.awt.Color(217, 231, 245));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -103,11 +106,12 @@ public class CityManagementPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Zip", "Name", "Country"
+                "ID", "Name", "Country"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        bt_view1.setBackground(new java.awt.Color(195, 225, 255));
         bt_view1.setText("Refresh Table");
         bt_view1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,10 +134,10 @@ public class CityManagementPanel extends javax.swing.JPanel {
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_zip, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_country, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_city, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                            .addComponent(txt_country, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                            .addComponent(label_id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(bt_view1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,7 +148,7 @@ public class CityManagementPanel extends javax.swing.JPanel {
                             .addGap(38, 38, 38)
                             .addComponent(bt_view, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addContainerGap(223, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,7 +166,7 @@ public class CityManagementPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_zip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(label_id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,7 +175,7 @@ public class CityManagementPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_country, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(439, Short.MAX_VALUE))
+                .addContainerGap(448, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -183,7 +187,7 @@ public class CityManagementPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         
-        int id = Integer.parseInt(txt_zip.getText());
+        
         String name = txt_city.getText();
         String country = txt_country.getText();
         
@@ -191,12 +195,8 @@ public class CityManagementPanel extends javax.swing.JPanel {
         int selected_row = jTable1.getSelectedRow();
         City citySelected = (City)model.getValueAt(selected_row, 0);
 
-        if(jTable1.getSelectedRowCount() == 1) {
-
-            
+        if(jTable1.getSelectedRowCount() == 1) {      
             int index = cityDirectory.getCityDirectory().indexOf(citySelected);
-            
-            cityDirectory.getCityDirectory().get(index).setId(id);
             cityDirectory.getCityDirectory().get(index).setName(name);
             cityDirectory.getCityDirectory().get(index).setCountry(country);
         }   
@@ -208,10 +208,6 @@ public class CityManagementPanel extends javax.swing.JPanel {
         CreateCityFrame city = new CreateCityFrame(cityDirectory);
         city.show();
     }//GEN-LAST:event_bt_createActionPerformed
-
-    private void txt_zipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_zipActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_zipActionPerformed
 
     private void bt_viewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_viewActionPerformed
         // TODO add your handling code here:
@@ -225,12 +221,9 @@ public class CityManagementPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         City city = (City)model.getValueAt(selected_row, 0);
         
-        txt_zip.setText(String.valueOf(city.getId()));
+        label_id.setText(String.valueOf(city.getId()));
         txt_city.setText(city.getName());
-        txt_country.setText(city.getCountry());
-        
-
-        
+        txt_country.setText(city.getCountry());       
     }//GEN-LAST:event_bt_viewActionPerformed
 
     private void bt_view1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_view1ActionPerformed
@@ -263,8 +256,8 @@ public class CityManagementPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel label_id;
     private javax.swing.JTextField txt_city;
     private javax.swing.JTextField txt_country;
-    private javax.swing.JTextField txt_zip;
     // End of variables declaration//GEN-END:variables
 }

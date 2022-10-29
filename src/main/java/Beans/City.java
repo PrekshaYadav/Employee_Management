@@ -5,6 +5,7 @@
 package Beans;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -12,16 +13,15 @@ import java.util.ArrayList;
  */
 public class City {
     
-    private int id;
+    
+    private UUID id = UUID.randomUUID();
     private String name;
     private String country;
     private ArrayList<Community> communityDir;
-    public City(int id, String name, String country) {
-        this.id = id;
+    public City(String name, String country) {
         this.name = name;
         this.country = country;
         this.communityDir = new ArrayList<Community>();
-
     }
     
 
@@ -30,14 +30,14 @@ public class City {
 
     }
 
-    public City(int id, String name, String country, ArrayList<Community> communityDir) {
-        this.id = id;
+    public City(String name, String country, ArrayList<Community> communityDir) {
+        
         this.name = name;
         this.country = country;
         this.communityDir = new ArrayList<Community>();
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -53,10 +53,7 @@ public class City {
         return communityDir;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
+   
     public void setName(String name) {
         this.name = name;
     }

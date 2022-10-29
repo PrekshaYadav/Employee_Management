@@ -38,4 +38,10 @@ public class EncounterDirectory {
        
     }
     
+    public Encounter addEncounter()
+    {
+        Encounter encounter = new Encounter();
+        encounterHistory.add(encounter);
+        return encounter;
+    } 
 }

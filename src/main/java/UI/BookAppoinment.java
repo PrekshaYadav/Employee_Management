@@ -4,6 +4,23 @@
  */
 package UI;
 
+import Beans.City;
+import Beans.CityDirectory;
+import Beans.Community;
+import Beans.Doctor;
+import Beans.Encounter;
+import Beans.EncounterDirectory;
+import Beans.Hospital;
+import Beans.Patient;
+import Beans.PatientDirectory;
+import Beans.VitalSign;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author preks
@@ -13,8 +30,35 @@ public class BookAppoinment extends javax.swing.JPanel {
     /**
      * Creates new form BookAppoinment
      */
-    public BookAppoinment() {
+    
+    PatientDirectory patientDirectory;
+    CityDirectory cityDirectory;
+    Patient patientSelected;
+    Community communitySelected;
+    //VitalSign vitalSign;
+
+    public BookAppoinment(PatientDirectory patientDirectory, CityDirectory cityDirectory, Patient patientSelected) {
         initComponents();
+        this.patientDirectory = patientDirectory;
+        this.cityDirectory = cityDirectory;
+        this.patientSelected = patientSelected;
+        //vitalSign = new VitalSign();
+        communitySelected = new Community();
+        
+         ArrayList<City> cityDir = cityDirectory.getCityDirectory();
+        
+        ArrayList<String> patNames = new ArrayList<>();
+        for(City city:cityDir){
+            patNames.add(city.getName());
+        }
+        jComboBox1.setModel(new DefaultComboBoxModel<String>(patNames.toArray(new String[0])));
+        
+        
+    }
+    
+    
+    public BookAppoinment() {
+        initComponents();       
     }
 
     /**
@@ -28,26 +72,32 @@ public class BookAppoinment extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txt_location = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         start_date = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         start_date1 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txt_vitalSign = new javax.swing.JTextField();
+        bt_book_appointment = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        city_search = new javax.swing.JButton();
+        com_search = new javax.swing.JButton();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        com_search1 = new javax.swing.JButton();
+        start_date2 = new javax.swing.JTextField();
+        txt_id = new javax.swing.JTextField();
+        start_date3 = new javax.swing.JTextField();
+        txt_vitalSign1 = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Book Appoinment");
 
-        jLabel2.setText("Location:");
-
-        txt_location.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_locationActionPerformed(evt);
-            }
-        });
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("City");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -57,7 +107,7 @@ public class BookAppoinment extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Date", "Doctor ", "Hospital", "Designation", "PhoneNo"
+                "Doctor ID ", "Doctor ", "Hospital", "Designation", "PhoneNo"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -78,16 +128,77 @@ public class BookAppoinment extends javax.swing.JPanel {
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txt_vitalSign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txt_vitalSignActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Book");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bt_book_appointment.setText("Book");
+        bt_book_appointment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bt_book_appointmentActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Community");
+
+        city_search.setText("Search");
+        city_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                city_searchActionPerformed(evt);
+            }
+        });
+
+        com_search.setText("Search");
+        com_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                com_searchActionPerformed(evt);
+            }
+        });
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Community");
+
+        com_search1.setText("Search");
+        com_search1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                com_search1ActionPerformed(evt);
+            }
+        });
+
+        start_date2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        start_date2.setText("ID");
+        start_date2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                start_date2ActionPerformed(evt);
+            }
+        });
+
+        txt_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_idActionPerformed(evt);
+            }
+        });
+
+        start_date3.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        start_date3.setText("Severity");
+        start_date3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                start_date3ActionPerformed(evt);
+            }
+        });
+
+        txt_vitalSign1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_vitalSign1ActionPerformed(evt);
             }
         });
 
@@ -102,22 +213,50 @@ public class BookAppoinment extends javax.swing.JPanel {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txt_location, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(bt_book_appointment, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(city_search, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(com_search, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(com_search1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(start_date2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(start_date, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(start_date1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(start_date1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(txt_vitalSign))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(start_date3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_vitalSign1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(100, 100, 100)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -128,26 +267,39 @@ public class BookAppoinment extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_location, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(start_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(city_search))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(com_search))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(com_search1))
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(start_date2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(start_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_vitalSign, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(start_date1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addComponent(jButton1)
-                .addContainerGap(417, Short.MAX_VALUE))
+                    .addComponent(start_date3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_vitalSign1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addComponent(bt_book_appointment)
+                .addContainerGap(323, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txt_locationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_locationActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_locationActionPerformed
 
     private void start_dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_start_dateActionPerformed
         // TODO add your handling code here:
@@ -157,25 +309,166 @@ public class BookAppoinment extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_start_date1ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txt_vitalSignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_vitalSignActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txt_vitalSignActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bt_book_appointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_book_appointmentActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        int selected_row = jTable1.getSelectedRow();
+        Doctor doctorSelected = (Doctor)model.getValueAt(selected_row, 0);
+        int flag = 0;
+        Encounter encounter = patientSelected.getEncounter().addEncounter();
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date1 = sdf.format(jDateChooser1.getDate());
+        LocalDate date = LocalDate.parse(date1);
+        encounter.setDate(date);
+        encounter.setDoctor(doctorSelected);
+        encounter.setId(Integer.parseInt(txt_id.getText()));
+        VitalSign vs = new VitalSign();
+        vs.setSymptom(txt_vitalSign.getText());
+        vs.setSeverity(Integer.parseInt(txt_vitalSign1.getText()));
+        encounter.setVitalSign(vs);
+        
+        //encounter.set
+        //en
+        
+        
+        JOptionPane.showMessageDialog(this, "Appointment Booked");
+    }//GEN-LAST:event_bt_book_appointmentActionPerformed
+
+    private void city_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_city_searchActionPerformed
+        // TODO add your handling code here:
+        String cityName = jComboBox1.getSelectedItem().toString();
+        
+        for(City city: cityDirectory.getCityDirectory())
+        {
+            if(city.getName().equals(cityName))
+            {
+                ArrayList<Community> comDir = city.getCommunityDir();
+        
+                ArrayList<String> comNames = new ArrayList<>();
+                for(Community com:comDir){
+                    comNames.add(com.getName());
+                }
+                jComboBox2.setModel(new DefaultComboBoxModel<String>(comNames.toArray(new String[0])));
+                break;
+                
+            }
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_city_searchActionPerformed
+
+    private void com_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_com_searchActionPerformed
+        // TODO add your handling code here:
+        String cityName = jComboBox1.getSelectedItem().toString();
+        String comName = jComboBox2.getSelectedItem().toString();
+        
+        for(City city: cityDirectory.getCityDirectory())
+        {
+            if(city.getName().equals(cityName))
+            {
+                
+                for(Community com :city.getCommunityDir() )
+                {
+                    if(com.getName().equals(comName))
+                    {
+                        System.out.println("------------------------------- Book appointment->com_searchActionPerformed");
+                        communitySelected = com;
+                        ArrayList<Hospital> hosDir = com.getHospitalDirectory().getHospitalDirectory();
+        
+                        ArrayList<String> hosNames = new ArrayList<>();
+                        for(Hospital hos:hosDir){
+                            hosNames.add(hos.getName());
+                            
+                        }
+                        jComboBox3.setModel(new DefaultComboBoxModel<String>(hosNames.toArray(new String[0])));
+                        break;
+                    }
+                }
+                
+                
+                
+                
+            }
+        }
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_com_searchActionPerformed
+
+    private void com_search1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_com_search1ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        
+        String hosName = jComboBox3.getSelectedItem().toString();
+        for(Hospital hosp : communitySelected.getHospitalDirectory().getHospitalDirectory())
+        {
+            if(hosp.getName().equals(hosName))
+            {
+                for(Doctor doc: hosp.getDocterDirector().getDocterDirectory())
+                {
+                    System.out.println("----------------Book appointment populate");
+                    Object[] row = new Object[5];
+                    row[0] = doc;
+                    row[1] = doc.getName();
+                    row[2] = doc.getHospital();
+                    row[3] = doc.getSpecialization();
+                    row[4] = doc.getContactNo();
+                    model.addRow(row);
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_com_search1ActionPerformed
+
+    private void start_date2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_start_date2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_start_date2ActionPerformed
+
+    private void txt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_idActionPerformed
+
+    private void txt_vitalSign1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_vitalSign1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_vitalSign1ActionPerformed
+
+    private void start_date3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_start_date3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_start_date3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton bt_book_appointment;
+    private javax.swing.JButton city_search;
+    private javax.swing.JButton com_search;
+    private javax.swing.JButton com_search1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField start_date;
     private javax.swing.JTextField start_date1;
-    private javax.swing.JTextField txt_location;
+    private javax.swing.JTextField start_date2;
+    private javax.swing.JTextField start_date3;
+    private javax.swing.JTextField txt_id;
+    private javax.swing.JTextField txt_vitalSign;
+    private javax.swing.JTextField txt_vitalSign1;
     // End of variables declaration//GEN-END:variables
 }

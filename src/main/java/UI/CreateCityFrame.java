@@ -36,9 +36,7 @@ public class CreateCityFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txt_zip = new javax.swing.JTextField();
         txt_city = new javax.swing.JTextField();
         txt_country = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -47,16 +45,9 @@ public class CreateCityFrame extends javax.swing.JFrame {
         bt_back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel2.setText("ID");
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel4.setText("Country");
-
-        txt_zip.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_zipActionPerformed(evt);
-            }
-        });
 
         txt_city.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,6 +61,7 @@ public class CreateCityFrame extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("City Management");
 
+        bt_create.setBackground(new java.awt.Color(194, 224, 255));
         bt_create.setText("Create");
         bt_create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,6 +69,7 @@ public class CreateCityFrame extends javax.swing.JFrame {
             }
         });
 
+        bt_back.setBackground(new java.awt.Color(194, 224, 255));
         bt_back.setText("Back");
         bt_back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,12 +93,10 @@ public class CreateCityFrame extends javax.swing.JFrame {
                         .addComponent(bt_create, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_zip, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_country, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(69, 69, 69))
@@ -115,11 +106,7 @@ public class CreateCityFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jLabel1)
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_zip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -137,10 +124,6 @@ public class CreateCityFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_zipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_zipActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_zipActionPerformed
-
     private void txt_cityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cityActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_cityActionPerformed
@@ -148,12 +131,28 @@ public class CreateCityFrame extends javax.swing.JFrame {
     private void bt_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_createActionPerformed
         // TODO add your handling code here:
         
-        int id = Integer.parseInt(txt_zip.getText());
+        
         String name = txt_city.getText();
         String country = txt_country.getText();
         City city = cityDirectory.addCity();
         
-        city.setId(id);
+        if ((name.equals(""))
+            || (!name.matches("^[a-zA-Z]*$"))
+            || (name == null))
+        {
+            name = JOptionPane.showInputDialog(this, "Name invalid");
+            
+        } 
+        
+        if ((country.equals(""))
+            || (!country.matches("^[a-zA-Z]*$"))
+            || (country == null))
+        {
+            country = JOptionPane.showInputDialog(this, "Country invalid");
+            
+        } 
+        
+        //city.setId(id);
         city.setCountry(country);
         city.setName(name);
         JOptionPane.showMessageDialog( this, "City created .");
@@ -205,11 +204,9 @@ public class CreateCityFrame extends javax.swing.JFrame {
     private javax.swing.JButton bt_back;
     private javax.swing.JButton bt_create;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField txt_city;
     private javax.swing.JTextField txt_country;
-    private javax.swing.JTextField txt_zip;
     // End of variables declaration//GEN-END:variables
 }

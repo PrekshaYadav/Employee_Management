@@ -4,6 +4,14 @@
  */
 package UI;
 
+import Beans.CityDirectory;
+import Beans.Doctor;
+import Beans.DoctorDirectory;
+import Beans.HospitalDirectory;
+import Beans.Patient;
+import Beans.PatientDirectory;
+import Beans.PersonDirectory;
+
 /**
  *
  * @author preks
@@ -13,6 +21,25 @@ public class PatientForm extends javax.swing.JFrame {
     /**
      * Creates new form PatientForm
      */
+        
+    HospitalDirectory hospitalDirectory;
+    DoctorDirectory doctorDirectory;
+    PatientDirectory patientDirectory;
+    PersonDirectory personDirectory;
+    CityDirectory cityDirectory;
+    Patient patient;
+    public PatientForm(HospitalDirectory hospitalDirectory, DoctorDirectory doctorDirectory, PatientDirectory patientDirectory, PersonDirectory personDirectory, CityDirectory cityDirectory, Patient patient) {
+        this.hospitalDirectory = hospitalDirectory;
+        this.doctorDirectory = doctorDirectory;
+        this.patientDirectory = patientDirectory;
+        this.personDirectory = personDirectory;
+        this.cityDirectory = cityDirectory;
+        this.patient = patient;
+        initComponents();
+    }
+   
+    
+    
     public PatientForm() {
         initComponents();
     }
@@ -127,26 +154,26 @@ public class PatientForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        PersonalDetails patient = new PersonalDetails();
-        jSplitPane1.setRightComponent(patient);
+        PersonalDetails patientDetails = new PersonalDetails(patientDirectory, cityDirectory, patient);
+        jSplitPane1.setRightComponent(patientDetails);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        BookAppoinment appoinment = new BookAppoinment();
+        BookAppoinment appoinment = new BookAppoinment(patientDirectory, cityDirectory, patient );
         jSplitPane1.setRightComponent(appoinment);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void bt_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_logoutActionPerformed
         // TODO add your handling code here:
         dispose();
-        MainFrame mainFrame = new MainFrame();
+        MainFrame mainFrame = new MainFrame(hospitalDirectory, doctorDirectory, patientDirectory, personDirectory, cityDirectory);
         mainFrame.show();
     }//GEN-LAST:event_bt_logoutActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        PatientEncounterManagementPanel patientHistory = new PatientEncounterManagementPanel();
+        PatientEncounterManagementPanel patientHistory = new PatientEncounterManagementPanel(patientDirectory, cityDirectory, patient);
         jSplitPane1.setRightComponent(patientHistory);
     }//GEN-LAST:event_jButton3ActionPerformed
 

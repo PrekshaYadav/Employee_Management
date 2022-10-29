@@ -231,12 +231,28 @@ public class MainFrame extends javax.swing.JFrame {
         else if(role.equals("Patient"))
         {
             
-            if(username.equals("patadmin") && password.equals("password"))
+            int alert = 0;
+            for(Patient p : patientDirectory.getPatientDirectory()){
+            if((p.getUsername().equals(username)) && (p.getPassword().equals(password))) {
+                dispose();
+                PatientForm patientDashboard = new PatientForm(hospitalDirectory, doctorDirectory, patientDirectory, personDirectory, cityDirectory, p);
+                patientDashboard.show();
+                alert = 1;
+            }   
+                
+            }
+            if(alert == 0){
+                JOptionPane.showMessageDialog( null, "Username or Password incorrect" );
+            }
+            
+            
+            
+            /*if(username.equals("patadmin") && password.equals("password"))
             {
             dispose();
-            PatientForm patient = new PatientForm();
+            PatientForm patient = new PatientForm(hospitalDirectory, doctorDirectory, patientDirectory, personDirectory, cityDirectory);
             patient.show();
-            }
+            }*/
         }
         
         //dispose();

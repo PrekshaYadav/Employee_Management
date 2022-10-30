@@ -63,10 +63,13 @@ public class PatientEncounterManagementPanel extends javax.swing.JPanel {
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Appoinment Management");
 
+        bt_view.setBackground(new java.awt.Color(196, 225, 255));
         bt_view.setText("View");
         bt_view.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,6 +77,7 @@ public class PatientEncounterManagementPanel extends javax.swing.JPanel {
             }
         });
 
+        bt_reload.setBackground(new java.awt.Color(196, 225, 255));
         bt_reload.setText("Reload");
         bt_reload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +85,7 @@ public class PatientEncounterManagementPanel extends javax.swing.JPanel {
             }
         });
 
+        jTable1.setBackground(new java.awt.Color(226, 240, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

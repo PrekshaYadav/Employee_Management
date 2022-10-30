@@ -180,12 +180,42 @@ public class CreateCommunityFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
 
             Community community = new Community();
+            String name = tct_name.getText();
+            if ((name.equals(""))
+            || (!name.matches("^[a-zA-Z]*$"))
+            || (name == null))
+            {
+            name = JOptionPane.showInputDialog(this, "Name invalid");  
+            }  
             
-            community.setZipcode(Integer.parseInt(txt_id.getText()));
-            community.setName(tct_name.getText());
-            community.setCountry(txt_country.getText());
+            String regex =  "[0-9]+";
+            int id=0;
+            if(!txt_id.getText().matches(regex))
+            {
+                id = Integer.parseInt(JOptionPane.showInputDialog(this, "Invalid zip"));
+            }
+            else{
+            id = Integer.parseInt(txt_id.getText());
+            }
+
+            
+            
+            community.setZipcode(id);
+            community.setName(name);
+            
+            String country = txt_country.getText();
+            if ((country.equals(""))
+                || (!country.matches("^[a-zA-Z]*$"))
+                || (country == null))
+            {
+                country = JOptionPane.showInputDialog(this, "Country invalid");
+
+            } 
+            
+            community.setCountry(country);
             String cityTxt = txt_city.getText();
             community.setCity(cityTxt);
+            int flag = 0;
             for(City city : cityDirectory.getCityDirectory())
             {
                 if(city.getName().equals(cityTxt))
@@ -194,9 +224,12 @@ public class CreateCommunityFrame extends javax.swing.JFrame {
                     communityDir.add(community);
                     city.setCommunityDir(communityDir);
                     JOptionPane.showMessageDialog( this, "Community created .");
+                    flag =1;
                     break;
                 }
             }
+            if(flag == 0)
+                JOptionPane.showMessageDialog( this, "Invalid city, retry.");
                 dispose();
     }//GEN-LAST:event_bt_createActionPerformed
 

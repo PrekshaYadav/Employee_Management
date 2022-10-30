@@ -21,7 +21,7 @@ public class Doctor extends Person{
     private String password;
 
     public Doctor(String specialization, int experience, String license, String hospital, String username, String password, ArrayList<VitalSign> vitalSigns, int id, String name, int age, String gender, long contactNo, Date dateOfBirth, String city, String community, String bloodGroup, House house) {
-        super(id, name, age, gender, contactNo, dateOfBirth, city, community, bloodGroup, house);
+        super(name, age, gender, contactNo, dateOfBirth, city, community, bloodGroup, house);
         this.specialization = specialization;
         this.experience = experience;
         this.license = license;

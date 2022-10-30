@@ -310,7 +310,6 @@ public class DoctorEncounterManagementPanel extends javax.swing.JPanel {
                                            if(doctor.getName().equals(txt_doctor.getText()))
                                            {
                                                 patient.getEncounter().getEncounterHistory().get(index).setDoctor(doctor);
-                                                patient.getEncounter().getEncounterHistory().get(index).setId(Integer.parseInt(txt_id.getText()));
                                                 patient.getEncounter().getEncounterHistory().get(index).setFinalComments(txt_final_Comments.getText());
 
                                                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

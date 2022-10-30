@@ -64,8 +64,11 @@ public class VitalSignManagement extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         bt_reload = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel3.setText("Symptoms");
 
+        bt_create.setBackground(new java.awt.Color(196, 226, 255));
         bt_create.setText("Create");
         bt_create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +86,7 @@ public class VitalSignManagement extends javax.swing.JPanel {
             }
         });
 
+        jTable1.setBackground(new java.awt.Color(217, 231, 244));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -102,6 +106,7 @@ public class VitalSignManagement extends javax.swing.JPanel {
             }
         });
 
+        bt_update.setBackground(new java.awt.Color(196, 226, 255));
         bt_update.setText("Update");
         bt_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +114,7 @@ public class VitalSignManagement extends javax.swing.JPanel {
             }
         });
 
+        bt_view.setBackground(new java.awt.Color(196, 226, 255));
         bt_view.setText("View");
         bt_view.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +126,7 @@ public class VitalSignManagement extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Vital Sign Management");
 
+        bt_reload.setBackground(new java.awt.Color(196, 226, 255));
         bt_reload.setText("Reload");
         bt_reload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

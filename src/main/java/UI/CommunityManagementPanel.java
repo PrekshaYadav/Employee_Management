@@ -57,6 +57,9 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
         txt_city = new javax.swing.JTextField();
         bt_reload = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        bt_view.setBackground(new java.awt.Color(196, 225, 255));
         bt_view.setText("View");
         bt_view.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,6 +67,7 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
             }
         });
 
+        bt_create.setBackground(new java.awt.Color(196, 225, 255));
         bt_create.setText("Create");
         bt_create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +85,7 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
             }
         });
 
+        jTable1.setBackground(new java.awt.Color(217, 231, 244));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -89,7 +94,7 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "Name", "Country", "City"
+                "ID", "Name", "Country", "City ID"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -106,6 +111,7 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
             }
         });
 
+        bt_update.setBackground(new java.awt.Color(196, 225, 255));
         bt_update.setText("Update");
         bt_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +119,7 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Community Management");
 
@@ -121,6 +127,7 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
 
         jLabel5.setText("City");
 
+        bt_reload.setBackground(new java.awt.Color(196, 225, 255));
         bt_reload.setText("Reload");
         bt_reload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,21 +225,32 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
         String name = tct_name.getText();
         String country = txt_country.getText();
         String city = txt_city.getText();
-        System.out.println("##############1");
+        
+         if ((name.equals(""))
+            || (!name.matches("^[a-zA-Z]*$"))
+            || (name == null))
+            {
+            name = JOptionPane.showInputDialog(this, "Name invalid");  
+            }  
+        
+         String regex =  "[0-9]+";
+         if(!txt_id.getText().matches(regex))
+            {
+                id = Integer.parseInt(JOptionPane.showInputDialog(this, "Invalid zip"));
+            }
+            
+         
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int selected_row = jTable1.getSelectedRow();
         City citySelected = (City)model.getValueAt(selected_row, 3);
         Community communitySelected = (Community)model.getValueAt(selected_row, 0);
-        System.out.println("##############2");
 
         if(jTable1.getSelectedRowCount() == 1) {
 
-                    System.out.println("##############3");
 
             int index = cityDirectory.getCityDirectory().indexOf(citySelected);
             
             ArrayList<Community> comDir = cityDirectory.getCityDirectory().get(index).getCommunityDir();
-                    System.out.println("##############4");
 
             for(Community community: comDir)
             {
@@ -241,7 +259,6 @@ public class CommunityManagementPanel extends javax.swing.JPanel {
                 if(community.getName().equals(communitySelected.getName()))
                 {
                     community.setName(name);
-                    System.out.println("#############################");
                 }
                 
             } 

@@ -84,10 +84,13 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
         bt_view1 = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Encounter Management");
 
+        jTable1.setBackground(new java.awt.Color(217, 231, 244));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -136,6 +139,7 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
             }
         });
 
+        bt_view2.setBackground(new java.awt.Color(196, 225, 255));
         bt_view2.setText("View");
         bt_view2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,6 +147,7 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
             }
         });
 
+        bt_delete.setBackground(new java.awt.Color(196, 225, 255));
         bt_delete.setText("Delete");
         bt_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +155,7 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
             }
         });
 
+        bt_update.setBackground(new java.awt.Color(196, 225, 255));
         bt_update.setText("Update");
         bt_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,6 +163,7 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
             }
         });
 
+        bt_create.setBackground(new java.awt.Color(196, 225, 255));
         bt_create.setText("Create");
         bt_create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,6 +171,7 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
             }
         });
 
+        bt_view1.setBackground(new java.awt.Color(196, 225, 255));
         bt_view1.setText("Reload");
         bt_view1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -266,10 +274,6 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void txt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_idActionPerformed
-
     private void bt_view2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_view2ActionPerformed
         // TODO add your handling code here:
         
@@ -344,6 +348,19 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
     private void bt_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_updateActionPerformed
         // TODO add your handling code here:
         
+         
+        String Doctorrrr = txt_doctor.getText();
+        if ((Doctorrrr.equals(""))
+            || (!Doctorrrr.matches("^[a-zA-Z]*$"))
+            || (Doctorrrr == null))
+        {
+          Doctorrrr = JOptionPane.showInputDialog(this, "Please enter valid Name");
+       }  
+        
+        
+        
+        
+        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int selected_row = jTable1.getSelectedRow();
         Encounter encounterSelected = (Encounter)model.getValueAt(selected_row, 0);
@@ -368,7 +385,6 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
                                            if(doctor.getName().equals(txt_doctor.getText()))
                                            {
                                                 patient.getEncounter().getEncounterHistory().get(index).setDoctor(doctor);
-                                                patient.getEncounter().getEncounterHistory().get(index).setId(Integer.parseInt(txt_id.getText()));
                                                 patient.getEncounter().getEncounterHistory().get(index).setFinalComments(txt_final_Comments.getText());
 
                                                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -415,6 +431,10 @@ public class EncounterManagementPanel extends javax.swing.JPanel {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void txt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_idActionPerformed
 
     
     public void populatTable()

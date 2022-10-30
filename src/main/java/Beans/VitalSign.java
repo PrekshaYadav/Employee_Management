@@ -4,20 +4,22 @@
  */
 package Beans;
 
+import java.util.UUID;
+
 /**
  *
  * @author preks
  */
 public class VitalSign {
     
-    private int id;
+    private UUID  id = UUID.randomUUID();
     private String symptom;
     private int severity;
 
     public VitalSign() {
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -25,8 +27,7 @@ public class VitalSign {
         return symptom;
     }
 
-    public VitalSign(int id, String symptom, int severity) {
-        this.id = id;
+    public VitalSign( String symptom, int severity) {
         this.symptom = symptom;
         this.severity = severity;
     }
@@ -35,9 +36,7 @@ public class VitalSign {
         return severity;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    
 
     public void setSymptom(String symptom) {
         this.symptom = symptom;

@@ -133,7 +133,7 @@ public class CreateCityFrame extends javax.swing.JFrame {
         
         
         String name = txt_city.getText();
-        String country = txt_country.getText();
+        
         City city = cityDirectory.addCity();
         
         if ((name.equals(""))
@@ -143,7 +143,7 @@ public class CreateCityFrame extends javax.swing.JFrame {
             name = JOptionPane.showInputDialog(this, "Name invalid");
             
         } 
-        
+        String country = txt_country.getText();
         if ((country.equals(""))
             || (!country.matches("^[a-zA-Z]*$"))
             || (country == null))

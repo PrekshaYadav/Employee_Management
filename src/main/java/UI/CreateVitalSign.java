@@ -52,27 +52,18 @@ public class CreateVitalSign extends javax.swing.JFrame {
 
         jLabel3 = new javax.swing.JLabel();
         txt_severity = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txt_id = new javax.swing.JTextField();
         txt_symptoms = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         bt_create = new javax.swing.JButton();
         bt_back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setText("Symptoms");
 
-        jLabel2.setText("ID");
-
         jLabel4.setText("Severity");
-
-        txt_id.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_idActionPerformed(evt);
-            }
-        });
 
         txt_symptoms.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +75,7 @@ public class CreateVitalSign extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Vital Sign Management");
 
+        bt_create.setBackground(new java.awt.Color(196, 225, 255));
         bt_create.setText("Create");
         bt_create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +83,7 @@ public class CreateVitalSign extends javax.swing.JFrame {
             }
         });
 
+        bt_back.setBackground(new java.awt.Color(196, 225, 255));
         bt_back.setText("Back");
         bt_back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,12 +107,10 @@ public class CreateVitalSign extends javax.swing.JFrame {
                         .addComponent(bt_create, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_symptoms, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_severity, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(82, 82, 82))
@@ -129,11 +120,7 @@ public class CreateVitalSign extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel1)
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(92, 92, 92)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_symptoms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -145,15 +132,11 @@ public class CreateVitalSign extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_create, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bt_back, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(533, Short.MAX_VALUE))
+                .addContainerGap(535, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_idActionPerformed
 
     private void txt_symptomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_symptomsActionPerformed
         // TODO add your handling code here:
@@ -162,10 +145,23 @@ public class CreateVitalSign extends javax.swing.JFrame {
     private void bt_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_createActionPerformed
         // TODO add your handling code here:
         
+        String symptoms = txt_symptoms.getText();
+        if ((symptoms.equals(""))
+            || (symptoms == null))
+        {
+          symptoms = JOptionPane.showInputDialog(this, "Please enter valid symptom");
+       }  
+        
+        
+        String severityTxt = txt_severity.getText();
+        if(txt_severity.getText().equals(null)||txt_severity.getText().equals(""))
+        {
+         severityTxt = JOptionPane.showInputDialog(this, "Please enter Severity");   
+        }
+        
         VitalSign vs = new VitalSign();
-        vs.setId(Integer.parseInt(txt_id.getText()));
-        vs.setSeverity(Integer.parseInt(txt_severity.getText()));
-        vs.setSymptom(txt_symptoms.getText());
+        vs.setSeverity(Integer.parseInt(severityTxt));
+        vs.setSymptom(symptoms);
         int flag = 0;
         for(City city: cityDirectory.getCityDirectory())
             {
@@ -237,10 +233,8 @@ public class CreateVitalSign extends javax.swing.JFrame {
     private javax.swing.JButton bt_back;
     private javax.swing.JButton bt_create;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_severity;
     private javax.swing.JTextField txt_symptoms;
     // End of variables declaration//GEN-END:variables

@@ -5,6 +5,7 @@
 package Beans;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -16,7 +17,7 @@ public class Hospital {
     
     private String name;
     private Long phoneNo;
-    private int id = 0;
+    private UUID id= UUID.randomUUID();
     private String city;
     private String community;
     private DoctorDirectory docterDirector;
@@ -64,13 +65,11 @@ public class Hospital {
         this.phoneNo = phoneNo;
     }
 
-    public  int getId() {
+    public  UUID getId() {
         return id;
     }
 
-    public  void setId(int id) {
-        this.id = id;
-    }
+   
 
     public DoctorDirectory getDocterDirector() {
         return docterDirector;

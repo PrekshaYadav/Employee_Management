@@ -5,6 +5,7 @@
 package Beans;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  *
@@ -12,7 +13,7 @@ import java.util.Date;
  */
 public class Person {
     
-    int id;
+    UUID id= UUID.randomUUID();
     String name;
     int age;
     String gender;
@@ -20,9 +21,10 @@ public class Person {
     Date dateOfBirth;
     String city;
     String community;
+    String bloodGroup;
+    House house;
 
-    public Person(int id, String name, int age, String gender, long contactNo, Date dateOfBirth, String city, String community, String bloodGroup, House house) {
-        this.id = id;
+    public Person( String name, int age, String gender, long contactNo, Date dateOfBirth, String city, String community, String bloodGroup, House house) {
         this.name = name;
         this.age = age;
         this.gender = gender;
@@ -50,8 +52,7 @@ public class Person {
         this.community = community;
     }
     
-    public Person(int id, String name, int age, String gender, long contactNo, Date dateOfBirth, String bloodGroup, House house) {
-        this.id = id;
+    public Person(String name, int age, String gender, long contactNo, Date dateOfBirth, String bloodGroup, House house) {
         this.name = name;
         this.age = age;
         this.gender = gender;
@@ -61,26 +62,13 @@ public class Person {
         this.house = house;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-    String bloodGroup;
-    House house;
+    
+    
 
     public Person() {
     }
 
-    public Person(String name, int age, String gender, long contactNo, Date dateOfBirth, String bloodGroup, House house) {
-        
-        this.name = name;
-        this.age = age;
-        this.gender = gender;
-        this.contactNo = contactNo;
-        this.dateOfBirth = dateOfBirth;
-        this.bloodGroup = bloodGroup;
-        this.house = house;
-    }
-
+    
     public House getHouse() {
         return house;
     }
@@ -113,7 +101,7 @@ public class Person {
         this.bloodGroup = bloodGroup;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -142,7 +130,6 @@ public class Person {
     }
 
     public Person( String name, int age, String gender, long contactNo, Date dateOfBirth, String bloodGroup) {
-        id++;
         this.name = name;
         this.age = age;
         this.gender = gender;

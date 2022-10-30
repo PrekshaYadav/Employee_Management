@@ -296,7 +296,6 @@ public class PersonalDetails extends javax.swing.JPanel {
 
                     patient.setUsername(txt_username.getText());
                     patient.setPassword(txt_passsword.getText());
-                    patient.setId(Integer.parseInt(txt_id.getText()));
                     patient.setAge(Integer.parseInt(txt_age.getText()));
                     patient.setBloodGroup(txt_blood_group.getText());
                     patient.setHeight(Float.parseFloat(txt_height.getText()));

@@ -67,10 +67,13 @@ public class HouseManagementPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         member_count = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel5.setText("City");
 
         jLabel3.setText("Name");
 
+        bt_view.setBackground(new java.awt.Color(196, 225, 255));
         bt_view.setText("View");
         bt_view.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,10 +81,11 @@ public class HouseManagementPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("House Management");
 
+        bt_create.setBackground(new java.awt.Color(196, 225, 255));
         bt_create.setText("Create");
         bt_create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +93,7 @@ public class HouseManagementPanel extends javax.swing.JPanel {
             }
         });
 
+        bt_update.setBackground(new java.awt.Color(196, 225, 255));
         bt_update.setText("Update");
         bt_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,6 +123,7 @@ public class HouseManagementPanel extends javax.swing.JPanel {
             }
         });
 
+        jTable1.setBackground(new java.awt.Color(217, 231, 244));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -133,6 +139,7 @@ public class HouseManagementPanel extends javax.swing.JPanel {
 
         jLabel6.setText("Community");
 
+        bt_reload.setBackground(new java.awt.Color(196, 225, 255));
         bt_reload.setText("Reload");
         bt_reload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,15 +250,48 @@ public class HouseManagementPanel extends javax.swing.JPanel {
     private void bt_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_updateActionPerformed
         // TODO add your handling code here:
          
-        int id = Integer.parseInt(txt_id.getText());
-        String name = tct_name.getText();
+        //int id = Integer.parseInt(txt_id.getText());
+        //String name = tct_name.getText();
         String country = txt_country.getText();
         String city = txt_city.getText();
         
         String commTxt = txt_community.getText();    
         String ownerTxt = owner_name.getText();
-        int member_countTxt = Integer.parseInt(member_count.getText());
+        //int member_countTxt = Integer.parseInt(member_count.getText());
         
+        
+        
+        String name = tct_name.getText();
+            if ((name.equals(""))
+            || (!name.matches("^[a-zA-Z]*$"))
+            || (name == null))
+            {
+            name = JOptionPane.showInputDialog(this, "Name invalid");  
+            }  
+        
+            
+        String regex =  "[0-9]+";
+            int id=0;
+            if(!txt_id.getText().matches(regex))
+            {
+                id = Integer.parseInt(JOptionPane.showInputDialog(this, "Invalid apt no"));
+            }
+            else{
+            id = Integer.parseInt(txt_id.getText());
+            }
+            
+            
+            int mem_no=0;
+            if(!member_count.getText().matches(regex))
+            {
+                mem_no = Integer.parseInt(JOptionPane.showInputDialog(this, "Invalid member count"));
+            }
+            else{
+            mem_no = Integer.parseInt(member_count.getText());
+            }
+            
+        
+       
         
         System.out.println("##############1");
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -283,8 +323,8 @@ public class HouseManagementPanel extends javax.swing.JPanel {
                             {
                                 house.setName(name);
                                 System.out.println("#############################");
-                                house.setID(Integer.parseInt(txt_id.getText()));
-                                house.setMembers(Integer.parseInt(member_count.getText()));
+                                house.setID(id);
+                                house.setMembers(mem_no);
                                 house.setOwner(ownerTxt);
                                 //house.setName(name);
                             }
@@ -297,9 +337,8 @@ public class HouseManagementPanel extends javax.swing.JPanel {
         }
         else
         {
-            JOptionPane.showMessageDialog( this, "Invalid City.");
+            JOptionPane.showMessageDialog( this, "Invalid City, house not updated");
         }
-        System.out.println("##############6");
         populateTable();
      
         

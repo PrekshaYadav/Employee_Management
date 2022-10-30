@@ -64,7 +64,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Hospital Management Login");
         jLabel1.setPreferredSize(new java.awt.Dimension(150, 20));
@@ -73,6 +73,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Password");
 
+        comboBoxLogin.setBackground(new java.awt.Color(226, 240, 255));
         comboBoxLogin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "System Admin", "Hospital Admin", "Community Admin", "Doctor", "Patient" }));
         comboBoxLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,6 +81,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        bt_login.setBackground(new java.awt.Color(196, 225, 255));
         bt_login.setText("Login");
         bt_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

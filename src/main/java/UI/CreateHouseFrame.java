@@ -210,14 +210,56 @@ public class CreateHouseFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         String cityTxt = txt_city.getText();
         String communityTxt = txt_city1.getText();
+        
+        
+        String name = tct_name.getText();
+            if ((name.equals(""))
+            || (!name.matches("^[a-zA-Z]*$"))
+            || (name == null))
+            {
+            name = JOptionPane.showInputDialog(this, "Name invalid");  
+            }  
+        
+            
+        String regex =  "[0-9]+";
+            int id=0;
+            if(!txt_id.getText().matches(regex))
+            {
+                id = Integer.parseInt(JOptionPane.showInputDialog(this, "Invalid apt no"));
+            }
+            else{
+            id = Integer.parseInt(txt_id.getText());
+            }
+            
+            
+            int mem_no=0;
+            if(!member_count.getText().matches(regex))
+            {
+                mem_no = Integer.parseInt(JOptionPane.showInputDialog(this, "Invalid member count"));
+            }
+            else{
+            mem_no = Integer.parseInt(member_count.getText());
+            }
+            
+        String country = txt_country.getText();
+        if ((country.equals(""))
+            || (!country.matches("^[a-zA-Z]*$"))
+            || (country == null))
+        {
+            country = JOptionPane.showInputDialog(this, "Country invalid");
+            
+        } 
+        
+            
+            
         House house = new House();
-        house.setID(Integer.parseInt(txt_id.getText()));
-        house.setName(tct_name.getText());
+        house.setID(id);
+        house.setName(name);
         house.setCity(cityTxt);
         house.setCommunity(communityTxt);
-        house.setMembers(Integer.parseInt(member_count.getText()));
+        house.setMembers(mem_no);
         house.setOwner(owner_name.getText());
-        house.setCountry(txt_country.getText());
+        house.setCountry(country);
         int flag = 0;
         for(City city: cityDirectory.getCityDirectory())
         {

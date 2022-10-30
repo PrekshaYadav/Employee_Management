@@ -87,8 +87,6 @@ public class BookAppoinment extends javax.swing.JPanel {
         jComboBox3 = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         com_search1 = new javax.swing.JButton();
-        start_date2 = new javax.swing.JTextField();
-        txt_id = new javax.swing.JTextField();
         start_date3 = new javax.swing.JTextField();
         txt_vitalSign1 = new javax.swing.JTextField();
 
@@ -174,20 +172,6 @@ public class BookAppoinment extends javax.swing.JPanel {
             }
         });
 
-        start_date2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        start_date2.setText("ID");
-        start_date2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                start_date2ActionPerformed(evt);
-            }
-        });
-
-        txt_id.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_idActionPerformed(evt);
-            }
-        });
-
         start_date3.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         start_date3.setText("Severity");
         start_date3.addActionListener(new java.awt.event.ActionListener() {
@@ -236,11 +220,7 @@ public class BookAppoinment extends javax.swing.JPanel {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(city_search, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(com_search, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(com_search1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(start_date2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(com_search1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -281,11 +261,7 @@ public class BookAppoinment extends javax.swing.JPanel {
                     .addComponent(com_search1))
                 .addGap(15, 15, 15)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(start_date2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(start_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -327,7 +303,6 @@ public class BookAppoinment extends javax.swing.JPanel {
         LocalDate date = LocalDate.parse(date1);
         encounter.setDate(date);
         encounter.setDoctor(doctorSelected);
-        encounter.setId(Integer.parseInt(txt_id.getText()));
         VitalSign vs = new VitalSign();
         vs.setSymptom(txt_vitalSign.getText());
         vs.setSeverity(Integer.parseInt(txt_vitalSign1.getText()));
@@ -431,14 +406,6 @@ public class BookAppoinment extends javax.swing.JPanel {
         
     }//GEN-LAST:event_com_search1ActionPerformed
 
-    private void start_date2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_start_date2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_start_date2ActionPerformed
-
-    private void txt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_idActionPerformed
-
     private void txt_vitalSign1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_vitalSign1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_vitalSign1ActionPerformed
@@ -465,9 +432,7 @@ public class BookAppoinment extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField start_date;
     private javax.swing.JTextField start_date1;
-    private javax.swing.JTextField start_date2;
     private javax.swing.JTextField start_date3;
-    private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_vitalSign;
     private javax.swing.JTextField txt_vitalSign1;
     // End of variables declaration//GEN-END:variables

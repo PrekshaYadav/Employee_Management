@@ -64,8 +64,6 @@ public class CreateEncounterFrame extends javax.swing.JFrame {
         bt_create = new javax.swing.JButton();
         txt_patient_name = new javax.swing.JTextField();
         bt_back = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        txt_id = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -76,12 +74,13 @@ public class CreateEncounterFrame extends javax.swing.JFrame {
 
         jLabel2.setText("Patient Name");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Encounter Management");
 
         jLabel5.setText("Doctor");
 
+        bt_create.setBackground(new java.awt.Color(196, 225, 255));
         bt_create.setText("Create");
         bt_create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,18 +94,11 @@ public class CreateEncounterFrame extends javax.swing.JFrame {
             }
         });
 
+        bt_back.setBackground(new java.awt.Color(196, 225, 255));
         bt_back.setText("Back");
         bt_back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_backActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setText("ID");
-
-        txt_id.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_idActionPerformed(evt);
             }
         });
 
@@ -131,14 +123,12 @@ public class CreateEncounterFrame extends javax.swing.JFrame {
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel6))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txt_patient_name, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_doctor, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_final_Comments, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(84, 84, 84))))
         );
@@ -147,11 +137,7 @@ public class CreateEncounterFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_patient_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -159,7 +145,7 @@ public class CreateEncounterFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_doctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -171,7 +157,7 @@ public class CreateEncounterFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_back)
                     .addComponent(bt_create))
-                .addContainerGap(503, Short.MAX_VALUE))
+                .addContainerGap(504, Short.MAX_VALUE))
         );
 
         pack();
@@ -188,19 +174,35 @@ public class CreateEncounterFrame extends javax.swing.JFrame {
 
     private void bt_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_createActionPerformed
         // TODO add your handling code here:
+        
+        String Pa_name = txt_patient_name.getText();
+        if ((Pa_name.equals(""))
+            || (!Pa_name.matches("^[a-zA-Z]*$"))
+            || (Pa_name == null))
+        {
+          Pa_name = JOptionPane.showInputDialog(this, "Please enter valid patient name");
+
+       }  
+        String Doctorrrr = txt_doctor.getText();
+        if ((Doctorrrr.equals(""))
+            || (!Doctorrrr.matches("^[a-zA-Z]*$"))
+            || (Doctorrrr == null))
+        {
+          Doctorrrr = JOptionPane.showInputDialog(this, "Please enter valid doctor name");
+       }  
+        
+        
         int flag = 0;
         int added = 0;
         Encounter encounter = new Encounter();
         for(Patient patient: patientDirectory.getPatientDirectory())
         {
             System.out.println("---------------------- create encounter 1");
-            if(patient.getName().equals(txt_patient_name.getText()))
+            if(patient.getName().equals(Pa_name))
             {
                 System.out.println("---------------------- create encounter 2");
                 EncounterDirectory encounterDir = patient.getEncounter();
-                encounter.setFinalComments(txt_final_Comments.getText());
-                encounter.setId(Integer.parseInt(txt_id.getText()));
-                
+                encounter.setFinalComments(txt_final_Comments.getText());                
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String date1 = sdf.format(jDateChooser1.getDate());
                 LocalDate date = LocalDate.parse(date1);
@@ -216,7 +218,7 @@ public class CreateEncounterFrame extends javax.swing.JFrame {
                             for(Doctor doc: hosp.getDocterDirector().getDocterDirectory())
                             {
                                 System.out.println("---------------------- create encounter 4"+doc.getName()+" "+txt_doctor.getText());
-                                if(doc.getName().equals(txt_doctor.getText()))
+                                if(doc.getName().equals(Doctorrrr))
                                 {
                                     System.out.println("---------------------- create encounter 5");
                                     encounter.setDoctor(doc);
@@ -246,10 +248,6 @@ public class CreateEncounterFrame extends javax.swing.JFrame {
                 
         
     }//GEN-LAST:event_bt_createActionPerformed
-
-    private void txt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_idActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,10 +293,8 @@ public class CreateEncounterFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField txt_doctor;
     private javax.swing.JTextField txt_final_Comments;
-    private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_patient_name;
     // End of variables declaration//GEN-END:variables
 }

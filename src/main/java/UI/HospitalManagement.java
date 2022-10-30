@@ -65,10 +65,13 @@ public class HospitalManagement extends javax.swing.JPanel {
         txt_id = new javax.swing.JTextField();
         bt_reload = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Hospital Management");
 
+        jTable1.setBackground(new java.awt.Color(217, 231, 244));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -82,6 +85,7 @@ public class HospitalManagement extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        bt_create.setBackground(new java.awt.Color(196, 225, 255));
         bt_create.setText("Create");
         bt_create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +93,7 @@ public class HospitalManagement extends javax.swing.JPanel {
             }
         });
 
+        bt_update.setBackground(new java.awt.Color(196, 225, 255));
         bt_update.setText("Update");
         bt_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +101,7 @@ public class HospitalManagement extends javax.swing.JPanel {
             }
         });
 
+        bt_delete.setBackground(new java.awt.Color(196, 225, 255));
         bt_delete.setText("Delete");
         bt_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +109,7 @@ public class HospitalManagement extends javax.swing.JPanel {
             }
         });
 
+        bt_view.setBackground(new java.awt.Color(196, 225, 255));
         bt_view.setText("View");
         bt_view.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +145,7 @@ public class HospitalManagement extends javax.swing.JPanel {
             }
         });
 
+        bt_reload.setBackground(new java.awt.Color(196, 225, 255));
         bt_reload.setText("Reload");
         bt_reload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,29 +240,43 @@ public class HospitalManagement extends javax.swing.JPanel {
 
     private void bt_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_updateActionPerformed
         // TODO add your handling code here:
-        int id = Integer.parseInt(txt_id.getText());
         String name = txt_name.getText();
         String city = txt_city.getText(); 
         String commTxt = jTextField3.getText();    
         Long phone_no = Long.parseLong(txt_phonoNo.getText());
         
         
-        System.out.println("##############1");
+        
+            if ((name.equals(""))
+            || (!name.matches("^[a-zA-Z]*$"))
+            || (name == null))
+            {
+            name = JOptionPane.showInputDialog(this, "Name invalid");  
+            }  
+        
+        String regex =  "[0-9]+";
+            if(!txt_phonoNo.getText().matches(regex))
+            {
+                phone_no = Long.parseLong(JOptionPane.showInputDialog(this, "Invalid contact no"));
+            }
+            else{
+            phone_no = Long.parseLong(txt_phonoNo.getText());
+            }
+       
+        
+        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int selected_row = jTable1.getSelectedRow();
         Hospital houseSelected = (Hospital)model.getValueAt(selected_row, 0);
         City citySelected = (City)model.getValueAt(selected_row, 2);
         Community communitySelected = (Community)model.getValueAt(selected_row, 3);
-        System.out.println("##############2");
-
+        int flag = 0;
         if(jTable1.getSelectedRowCount() == 1) {
 
-                    System.out.println("##############3");
 
             int indexCity = cityDirectory.getCityDirectory().indexOf(citySelected);
             
             ArrayList<Community> comDir = cityDirectory.getCityDirectory().get(indexCity).getCommunityDir();
-                    System.out.println("##############4");
                     
             for(Community community: comDir)
             {
@@ -268,16 +290,21 @@ public class HospitalManagement extends javax.swing.JPanel {
                         if(hospital.getName().equals(houseSelected.getName()))
                             {
                                 hospital.setName(name);
-                                hospital.setId(Integer.parseInt(txt_id.getText()));
                                 hospital.setPhoneNo(phone_no);
                                 //house.setName(name);
+                                flag = 1;
+                                JOptionPane.showMessageDialog( this, "Hospital updated .");
+                                break;
                             }
                         
                     }
                
-                JOptionPane.showMessageDialog( this, "Hospital updated .");
+                
                 }  
-            }        
+            } 
+            
+            if (flag ==0)
+                JOptionPane.showMessageDialog( this, "Invalid city or community.");
         }
         else
         {
@@ -359,10 +386,6 @@ public class HospitalManagement extends javax.swing.JPanel {
         
     }//GEN-LAST:event_bt_viewActionPerformed
 
-    private void txt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_idActionPerformed
-
     private void bt_reloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_reloadActionPerformed
         // TODO add your handling code here:
         populateTable();
@@ -407,6 +430,10 @@ public class HospitalManagement extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_bt_deleteActionPerformed
+
+    private void txt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_idActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

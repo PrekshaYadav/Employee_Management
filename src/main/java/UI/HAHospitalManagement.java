@@ -71,10 +71,11 @@ public class HAHospitalManagement extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         txt_name = new javax.swing.JTextField();
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Hospital Management");
 
+        jTable1.setBackground(new java.awt.Color(226, 240, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -89,6 +90,7 @@ public class HAHospitalManagement extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        bt_create.setBackground(new java.awt.Color(196, 225, 255));
         bt_create.setText("Create");
         bt_create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +98,7 @@ public class HAHospitalManagement extends javax.swing.JPanel {
             }
         });
 
+        bt_update.setBackground(new java.awt.Color(196, 225, 255));
         bt_update.setText("Update");
         bt_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +106,7 @@ public class HAHospitalManagement extends javax.swing.JPanel {
             }
         });
 
+        bt_view.setBackground(new java.awt.Color(196, 225, 255));
         bt_view.setText("View");
         bt_view.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,6 +134,7 @@ public class HAHospitalManagement extends javax.swing.JPanel {
             }
         });
 
+        reload.setBackground(new java.awt.Color(196, 225, 255));
         reload.setText("Reload");
         reload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,6 +241,23 @@ public class HAHospitalManagement extends javax.swing.JPanel {
         String commTxt = jTextField3.getText();    
         Long phone_no = Long.parseLong(txt_phonoNo.getText());
         
+        if ((name.equals(""))
+            || (!name.matches("^[a-zA-Z]*$"))
+            || (name == null))
+            {
+            name = JOptionPane.showInputDialog(this, "Name invalid");  
+            }  
+        
+        String regex =  "[0-9]+";
+            if(!txt_phonoNo.getText().matches(regex))
+            {
+                phone_no = Long.parseLong(JOptionPane.showInputDialog(this, "Invalid contact no"));
+            }
+            else{
+            phone_no = Long.parseLong(txt_phonoNo.getText());
+            }
+       
+        
         
         System.out.println("##############1");
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -266,7 +288,6 @@ public class HAHospitalManagement extends javax.swing.JPanel {
                         if(hospital.getName().equals(houseSelected.getName()))
                             {
                                 hospital.setName(name);
-                                hospital.setId(Integer.parseInt(txt_id.getText()));
                                 hospital.setPhoneNo(phone_no);
                                 //house.setName(name);
                             }

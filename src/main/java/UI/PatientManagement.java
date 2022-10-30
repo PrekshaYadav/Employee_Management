@@ -11,6 +11,8 @@ import Beans.Hospital;
 import Beans.House;
 import Beans.Patient;
 import Beans.PatientDirectory;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -80,8 +82,11 @@ public class PatientManagement extends javax.swing.JPanel {
         txt_heart_rate = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel3.setText("Name");
 
+        bt_view.setBackground(new java.awt.Color(196, 225, 255));
         bt_view.setText("View");
         bt_view.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +96,7 @@ public class PatientManagement extends javax.swing.JPanel {
 
         jLabel6.setText("House");
 
+        bt_create.setBackground(new java.awt.Color(196, 225, 255));
         bt_create.setText("Create");
         bt_create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,7 +110,7 @@ public class PatientManagement extends javax.swing.JPanel {
 
         jLabel5.setText("Community");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Patient Management");
 
@@ -114,6 +120,7 @@ public class PatientManagement extends javax.swing.JPanel {
             }
         });
 
+        jTable1.setBackground(new java.awt.Color(217, 231, 244));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -133,6 +140,7 @@ public class PatientManagement extends javax.swing.JPanel {
             }
         });
 
+        bt_update.setBackground(new java.awt.Color(196, 225, 255));
         bt_update.setText("Update");
         bt_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +148,7 @@ public class PatientManagement extends javax.swing.JPanel {
             }
         });
 
+        bt_delete.setBackground(new java.awt.Color(196, 225, 255));
         bt_delete.setText("Delete");
         bt_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,6 +172,7 @@ public class PatientManagement extends javax.swing.JPanel {
             }
         });
 
+        txt_reload.setBackground(new java.awt.Color(196, 225, 255));
         txt_reload.setText("Reload");
         txt_reload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -332,8 +342,45 @@ public class PatientManagement extends javax.swing.JPanel {
 
     private void bt_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_updateActionPerformed
         // TODO add your handling code here:
+        String name = txt_name.getText();
+            if ((name.equals(""))
+            || (!name.matches("^[a-zA-Z]*$"))
+            || (name == null))
+            {
+            name = JOptionPane.showInputDialog(this, "Name invalid");  
+            }  
+            
+        String regex =  "[0-9]+";
+            int age=0;
+            if(!txt_age.getText().matches(regex))
+            {
+                age = Integer.parseInt(JOptionPane.showInputDialog(this, "Invalid age"));
+            }
+            else{
+            age = Integer.parseInt(txt_age.getText());
+            }
         
-         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        String bloodgroup = txt_blood_group.getText();
+        String regex1 = "[A|B|AB|O][\\+|\\-]";
+        if((bloodgroup.equals(""))
+               || (!bloodgroup.matches(regex1))
+              || (bloodgroup == null))
+        {
+            bloodgroup = JOptionPane.showInputDialog(this, "Please enter valid bloodgroup");
+        }
+        
+        Long contact_no = Long.parseLong(txt_phone_no.getText());
+        Pattern p = Pattern.compile("^\\d{10}$");
+        Matcher m = p.matcher(txt_phone_no.getText());
+        
+        if(!m.matches())
+        {
+            contact_no = Long.parseLong(JOptionPane.showInputDialog(this, "Contact number invalid "));
+
+        }
+        
+        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int selected_row = jTable1.getSelectedRow();
         Patient patientSelected = (Patient)model.getValueAt(selected_row, 0);
         int flag = 0;
@@ -377,15 +424,14 @@ public class PatientManagement extends javax.swing.JPanel {
                 
                 if(flag == 1)
                 {
-                    patient.setName(txt_name.getText());
+                    patient.setName(name);
                    
-                    patient.setContactNo(Long.parseLong(txt_phone_no.getText()));
+                    patient.setContactNo(contact_no);
 
                     patient.setUsername(txt_username.getText());
                     patient.setPassword(txt_passsword.getText());
-                    patient.setId(Integer.parseInt(txt_id.getText()));
-                    patient.setAge(Integer.parseInt(txt_age.getText()));
-                    patient.setBloodGroup(txt_blood_group.getText());
+                    patient.setAge(age);
+                    patient.setBloodGroup(bloodgroup);
                     patient.setHeight(Float.parseFloat(txt_height.getText()));
                     patient.setWeight(Float.parseFloat(txt_weight.getText()));
                     patient.setHeartRate(Integer.parseInt(txt_heart_rate.getText()));

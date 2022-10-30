@@ -6,6 +6,7 @@ package Beans;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  *
@@ -13,11 +14,9 @@ import java.util.Date;
  */
 public class Encounter {
     
-    private int id;
+    private UUID id = UUID.randomUUID() ;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    
     private LocalDate date;
     private VitalSign vitalSign;
     private Doctor doctor;
@@ -51,7 +50,7 @@ public class Encounter {
         this.finalComments = finalComments;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 

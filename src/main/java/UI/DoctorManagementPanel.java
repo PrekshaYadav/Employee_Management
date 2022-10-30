@@ -13,6 +13,8 @@ import Beans.Hospital;
 import Beans.HospitalDirectory;
 import Beans.House;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -73,6 +75,9 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         bt_view1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        bt_create.setBackground(new java.awt.Color(196, 225, 255));
         bt_create.setText("Create");
         bt_create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +87,7 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Name");
 
+        bt_update.setBackground(new java.awt.Color(196, 225, 255));
         bt_update.setText("Update");
         bt_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +97,7 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
 
         jLabel3.setText("City");
 
+        bt_delete.setBackground(new java.awt.Color(196, 225, 255));
         bt_delete.setText("Delete");
         bt_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,6 +115,7 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
             }
         });
 
+        bt_view.setBackground(new java.awt.Color(196, 225, 255));
         bt_view.setText("View");
         bt_view.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,10 +129,11 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Docter Management");
 
+        jTable1.setBackground(new java.awt.Color(217, 231, 244));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -174,6 +183,7 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
 
         jLabel16.setText("License");
 
+        bt_view1.setBackground(new java.awt.Color(196, 225, 255));
         bt_view1.setText("Reload");
         bt_view1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,11 +304,38 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
     private void bt_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_updateActionPerformed
         // TODO add your handling code here:
         
-         String name = txt_name.getText();
+        String name = txt_name.getText();
+            if ((name.equals(""))
+            || (!name.matches("^[a-zA-Z]*$"))
+            || (name == null))
+            {
+            name = JOptionPane.showInputDialog(this, "Name invalid");  
+            }
+        
+        
+        Long contact_no = Long.parseLong(txt_phonoNo.getText());
+        Pattern p = Pattern.compile("^\\d{10}$");
+        Matcher m = p.matcher(txt_phonoNo.getText());
+        
+        if(!m.matches())
+        {
+            contact_no = Long.parseLong(JOptionPane.showInputDialog(this, "Contact number invalid "));
+
+        }
+        
+        
+        String regex2 =  "[0-9]+";
+            int experiense= 0;
+            if(!txt_experience.getText().matches(regex2))
+            {
+                experiense = Integer.parseInt(JOptionPane.showInputDialog(this, "Invalid zip"));
+            }
+            else{
+            experiense = Integer.parseInt(txt_experience.getText());
+            }       
         String city = txt_city.getText(); 
         String commTxt = jTextField3.getText();    
         String hosp_txt = txt_hospital.getText();
-        Long phone_no = Long.parseLong(txt_phonoNo.getText());
         System.out.println("##############1");
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int selected_row = jTable1.getSelectedRow();
@@ -333,9 +370,9 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
                                     {
                                         doctorInfo.setName(txt_name.getText());
                                         doctorInfo.setSpecialization(txt_special.getText());
-                                        doctorInfo.setExperience(Integer.parseInt(txt_experience.getText()));
+                                        doctorInfo.setExperience(experiense);
                                         doctorInfo.setLicense(txt_license.getText());
-                                        doctorInfo.setContactNo(Long.parseLong(txt_phonoNo.getText()));
+                                        doctorInfo.setContactNo(contact_no);
                                         doctorInfo.setUsername(txt_username.getText());
                                         doctorInfo.setPassword(txt_password.getText());
         
